@@ -1,6 +1,22 @@
-//! css framework
-// @import "../node_modules/bootstrap/bootstrap/";
+// Global External
+
 @import "~bootstrap/scss/bootstrap";
 
-//! utilities
-// @import "./styles/utils/variables"; // global variables
+// Global Internal
+@import "./styles/utils/variables";
+@import "./styles/global/global";
+@import "./styles/global/typography";
+@import "./styles/global/background";
+@import "./styles/global/font";
+@import "./styles/global/debug";
+@import "./styles/global/image";
+@import "./styles/global/margin";
+
+// Components
+
+@import "./styles/components/featured";
+@import "./styles/components/hscroller";
+@import "./styles/components/menu";
+@import "./styles/components/horaizon";
+@import "./styles/components/hscroller";
+@import "./styles/components/brand";
