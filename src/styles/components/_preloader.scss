@@ -2,12 +2,12 @@
   z-index: 10000;
 }
 
-.ui__preloader--show {
+.ui__event--show {
   opacity: 1;
   transition: opacity var(--transition-xl);
 }
 
-.ui__preloader--hide {
+.ui__event--hide {
   opacity: 0;
   transition: opacity var(--transition-xl);
 }

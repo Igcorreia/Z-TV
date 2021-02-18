@@ -1,5 +1,9 @@
-.menu-bar {
+.ui__menu--menuitem .menu-bar {
   width: 24px;
   height: 5px;
+  background-color: transparent;
+}
+
+.ui__menu--menuitem.ui__event--active .menu-bar {
   background-color: var(--blue-2);
 }

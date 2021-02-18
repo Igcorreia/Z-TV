@@ -9,9 +9,11 @@ window.defaults = {
   root: "#root",
   show_suffix: "show",
   hide_suffix: "hide",
+  active_suffix: "active",
   data: null,
   data_url: "https://next.json-generator.com/api/json/get/V13KQEB-c",
   menu: "",
+  menu_default: "home",
   preloader: 5000,
   homepage: "",
   items: "",
@@ -22,6 +24,7 @@ window.defaults = {
     navigation: "ui__navigation",
     brand: "ui__brand",
     menu: "ui__menu",
+    events: "ui__event",
   },
   os: null,
   introsound: new Audio("/src/audio/bell.wav"),
@@ -56,7 +59,6 @@ window.init = {
         init.ui.update.hide(this.id);
       },
     },
-    nav: function () {},
     brand: {
       id: defaults.ui.brand,
       html: function () {
@@ -109,7 +111,11 @@ window.init = {
         return (
           `<div id="` +
           init.ui.preloader.id +
-          `" class="w-100 h-100 row bg-white justify-content-center align-items-center g-0 position-fixed ui__preloader--show">
+          `" class="w-100 h-100 row bg-white justify-content-center align-items-center g-0 position-fixed ` +
+          defaults.ui.events +
+          "--" +
+          defaults.show_suffix +
+          `">
             <div class="col-auto text-center">
               <div class="mb-4">
           ` +
@@ -126,34 +132,30 @@ window.init = {
         );
       },
       show: function () {
-        init.ui.update.show(this.id);
+        init.ui.update.show("#" + this.id);
       },
       hide: function () {
-        init.ui.update.hide(this.id);
+        init.ui.update.hide("#" + this.id);
       },
-    },
-    detail: {
-      inject: function () {},
-      open: function () {},
-      close: function () {},
-      destroy: function () {},
     },
     menu: {
       id: defaults.ui.menu,
       html: function () {
         for (i = 0; i < defaults.data.menu.length; i++) {
           defaults.menu +=
-            `
-                <div class="col">
-                    <a id="#` +
+            '<div class="col"><a id="' +
             defaults.ui.menu +
-            `--` +
+            "--" +
             defaults.data.menu[i].name +
-            `" class="btn mb-32" href="` +
+            `" class="` +
+            defaults.ui.menu +
+            `--menuitem btn mb-32" href="` +
             defaults.data.menu[i].path +
             `">` +
             defaults.data.menu[i].svg +
-            `<div class="menu-bar ms-auto me-auto"></div>
+            `<div id="` +
+            defaults.ui.menu +
+            `--bar" class="menu-bar ms-auto me-auto"></div>
                     </a>
                 </div>
             `;
@@ -167,31 +169,34 @@ window.init = {
 
         return defaults.menu;
       },
-    },
-    hscroller: {
-      inject: function () {},
-      open: function () {},
-      close: function () {},
-      destroy: function () {},
+      change: function (id) {
+        init.ui.update.deactivate("." + defaults.ui.menu + "--menuitem");
+        init.ui.update.activate(id);
+      },
     },
     update: {
-      show: function (id) {
+      show: function (sel) {
         requestAnimationFrame(function () {
-          $("#" + id).addClass(id + "--" + defaults.show_suffix);
-          $("#" + id).removeClass(id + "--" + defaults.hide_suffix);
-          $(defaults.root).addClass("elm--" + id + "--" + defaults.show_suffix);
-          $(defaults.root).removeClass(
-            "elm--" + id + "--" + defaults.hide_suffix
-          );
+          $(sel).addClass(defaults.ui.events + "--" + defaults.show_suffix);
+          $(sel).removeClass(defaults.ui.events + "--" + defaults.hide_suffix);
         });
       },
-      hide: function (id) {
+      hide: function (sel) {
         requestAnimationFrame(function () {
-          $("#" + id).addClass(id + "--" + defaults.hide_suffix);
-          $("#" + id).removeClass(id + "--" + defaults.show_suffix);
-          $(defaults.root).addClass("elm--" + id + "--" + defaults.hide_suffix);
-          $(defaults.root).removeClass(
-            "elm--" + id + "--" + defaults.show_suffix
+          $(sel).addClass(defaults.ui.events + "--" + defaults.hide_suffix);
+          $(sel).removeClass(defaults.ui.events + "--" + defaults.show_suffix);
+        });
+      },
+      activate: function (sel) {
+        requestAnimationFrame(function () {
+          console.log(defaults.ui.events + "--" + defaults.active_suffix);
+          $(sel).addClass(defaults.ui.events + "--" + defaults.active_suffix);
+        });
+      },
+      deactivate: function (sel) {
+        requestAnimationFrame(function () {
+          $(sel).removeClass(
+            defaults.ui.events + "--" + defaults.active_suffix
           );
         });
       },
@@ -203,6 +208,7 @@ window.init = {
       _osKeyPress();
       _osAutoRefresh();
     }
+    _menuChange();
   },
   fetchdata: new Promise(function (resolve, reject) {
     $.ajax({
@@ -440,6 +446,12 @@ function _osAutoRefresh() {
         window.location = window.location;
       }, 5000);
     }
+  }
+}
+
+function _menuChange(id, path) {
+  if ((id == undefined || id == null) && (path == undefined || path == null)) {
+    init.ui.menu.change("#" + defaults.ui.menu + "--" + defaults.menu_default);
   }
 }
 
