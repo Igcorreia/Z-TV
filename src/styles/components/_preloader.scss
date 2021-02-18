@@ -1,0 +1,13 @@
+#ui__preloader {
+  z-index: 10;
+}
+
+.ui__preloader--show {
+  opacity: 1;
+  transition: opacity var(--transition-xl);
+}
+
+.ui__preloader--hide {
+  opacity: 0;
+  transition: opacity var(--transition-xl);
+}

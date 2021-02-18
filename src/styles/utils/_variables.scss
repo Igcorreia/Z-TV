@@ -18,4 +18,9 @@
   --bar-width: 24px;
   --bar-heigth: 5px;
   --active-border: solid 4px var(--blue-2);
+  --transition-xs: 0.3s cubic-bezier(0.49, -0.18, 0.48, 1.15) 0s;
+  --transition-sm: 0.5s cubic-bezier(0.49, -0.18, 0.48, 1.15) 0s;
+  --transition-md: 0.7s cubic-bezier(0.49, -0.18, 0.48, 1.15) 0s;
+  --transition-lg: 0.9s cubic-bezier(0.49, -0.18, 0.48, 1.15) 0s;
+  --transition-xl: 1.1s cubic-bezier(0.49, -0.18, 0.48, 1.15) 0s;
 }

@@ -4,7 +4,7 @@
 
 // Global Internal
 @import "./styles/utils/variables";
-@import "./styles/global/global";
+@import "./styles/global/reset";
 @import "./styles/global/typography";
 @import "./styles/global/background";
 @import "./styles/global/font";
@@ -20,3 +20,4 @@
 @import "./styles/components/horaizon";
 @import "./styles/components/hscroller";
 @import "./styles/components/brand";
+@import "./styles/components/preloader";
