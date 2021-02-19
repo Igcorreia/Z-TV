@@ -1,7 +1,11 @@
 #ui__featured--front__section {
   z-index: 3;
 }
-
+#ui__featured--front__image {
+  z-index: -1;
+  transform: scale(1.5);
+  transition: transform var(--transition-xxxl);
+}
 #ui__featured--front__image:after,
 #ui__featured--front__image:before {
   content: "";
@@ -41,4 +45,10 @@
   //   rgba(255, 255, 255, 0.55),
   //   transparent
   // );
+}
+
+.ui__event--prepare-animation #ui__featured--front__image {
+}
+.ui__event--animate #ui__featured--front__image {
+  transform: scale(1);
 }

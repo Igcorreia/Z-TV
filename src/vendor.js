@@ -10,6 +10,8 @@ window.defaults = {
   show_suffix: "show",
   hide_suffix: "hide",
   active_suffix: "active",
+  prepare_animate_suffix: "prepare-animation",
+  animate_suffix: "animate",
   data: null,
   data_url: "https://next.json-generator.com/api/json/get/V13KQEB-c",
   menu: "",
@@ -31,7 +33,7 @@ window.defaults = {
   os: null,
   introsound: new Audio("/src/audio/bell.wav"),
 };
-
+console.log(_personalSignature());
 console.log("-- APP LOADED --");
 
 window.init = {
@@ -145,6 +147,31 @@ window.init = {
     featured: {
       id: defaults.ui.featured,
       html: function (content) {
+        _buttons_html = function () {
+          buttons = "";
+          for (
+            i = 0;
+            i < defaults.data.ui.home.sections.featured.content.buttons.length;
+            i++
+          ) {
+            buttons +=
+              `
+              <div class="col-auto">
+                <div class="btn me-3 ` +
+              //defaults.data.ui.home.sections.featured.content.buttons[i].style +
+              ` ff-os-b fs-lg">
+                <i class="fas fa-` +
+              defaults.data.ui.home.sections.featured.content.buttons[i].icon +
+              `"></i>
+                <span class=""> ` +
+              defaults.data.ui.home.sections.featured.content.buttons[i].title +
+              `</span>
+              </div></div>
+            `;
+          }
+          return buttons;
+        };
+
         defaults.featured =
           `<div id="` +
           init.ui.featured.id +
@@ -182,9 +209,14 @@ window.init = {
                         <div class="fs-lg text-block-1 m-0 p-0 mb-3 text-sd-md">` +
           defaults.data.ui.home.sections.featured.content.description +
           `</div>
-                        <div class="fs-md text-block-1 ff-os-sb m-0 p-0 text-grey-4 text-sd-md">` +
+                        <div class="fs-md text-block-1 ff-os-sb m-0 p-0 mb-3 text-grey-4 text-sd-md">` +
           defaults.data.ui.home.sections.featured.content.note +
           `</div>
+                      </div>
+                      <div class="row justify-content-start align-items-center g-0">
+                      ` +
+          _buttons_html() +
+          `
                       </div>
                     </div>
                   </div>
@@ -198,6 +230,9 @@ window.init = {
         `;
         return defaults.featured;
       },
+      animate: function (id) {
+        init.ui.update.animate(id);
+      },
     },
     menu: {
       id: defaults.ui.menu,
@@ -210,7 +245,7 @@ window.init = {
             defaults.data.menu[i].name +
             `" class="` +
             defaults.ui.menu +
-            `--menuitem btn mb-32" href="` +
+            `--menuitem btn btn-link mb-32" href="` +
             defaults.data.menu[i].path +
             `">` +
             defaults.data.menu[i].svg +
@@ -250,7 +285,6 @@ window.init = {
       },
       activate: function (sel) {
         requestAnimationFrame(function () {
-          console.log(defaults.ui.events + "--" + defaults.active_suffix);
           $(sel).addClass(defaults.ui.events + "--" + defaults.active_suffix);
         });
       },
@@ -261,6 +295,16 @@ window.init = {
           );
         });
       },
+      animate: function (sel) {
+        requestAnimationFrame(function () {
+          $(sel)
+            .addClass(
+              defaults.ui.events + "--" + defaults.prepare_animate_suffix
+            )
+            .delay(1000)
+            .addClass(defaults.ui.events + "--" + defaults.animate_suffix);
+        });
+      },
     },
   },
   interactivity: function () {
@@ -269,6 +313,7 @@ window.init = {
       _osKeyPress();
       _osAutoRefresh();
     }
+    _featuredChange();
     _menuChange();
   },
   fetchdata: new Promise(function (resolve, reject) {
@@ -519,4 +564,28 @@ function _menuChange(id, path) {
   }
 }
 
+function _featuredChange(content) {
+  init.ui.featured.animate("#" + defaults.ui.featured);
+}
+
+function _personalSignature() {
+  return `
+/***********************************************************
+ ***********************************************************
+ ** 
+ **  👋 Hi there, I am Ignacio, welcome.                     
+ ** 
+ **  Thanks for visiting, please leave a like or follow me.
+ ** 
+ **  You may find me @igcorreia on 🐦, 😏📘, 👾
+ ** 
+ **  --> If you are hiring, I am looking for a fulltime job
+ **  --> I am from Europe (Portugal)
+ **  --> UI, UX, PRODUCT DESIGN
+ **  --> ignacio . r . correia (at) gmail . com
+ ** 
+ ***********************************************************
+ ************************************************************/
+`;
+}
 console.log("-- APP END --");

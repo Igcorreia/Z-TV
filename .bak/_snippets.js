@@ -30,3 +30,8 @@
 //     };
 //   },
 // },
+
+/*does not need on load validation
+  if (content == undefined || content == null) {
+    init.ui.featured.change(defaults.data.ui.home.sections.featured.content);
+  }*/

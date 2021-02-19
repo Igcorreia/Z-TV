@@ -5,6 +5,8 @@
 html,
 body {
   height: 100vh;
+  transform: translate3d(0px, 0px, 0px);
+  overflow: hidden;
 }
 
 h1,
