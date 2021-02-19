@@ -1,39 +1,44 @@
-#section__content {
+#ui__featured--front__section {
   z-index: 3;
 }
 
-#featured:after,
-#featured:before {
+#ui__featured--front__image:after,
+#ui__featured--front__image:before {
   content: "";
   position: absolute;
   z-index: 1;
   background-color: #fff;
 }
-#featured:after {
+#ui__featured--front__image:after {
   height: 40%;
   width: 100%;
   min-width: 350px;
   bottom: 0;
   left: 0;
-  background: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0.55),
-    transparent
-  );
+  background: url("/src/images/mask_bottom.png") no-repeat center bottom
+    transparent;
+  background-size: 100% 100%;
+  // background: linear-gradient(
+  //   0deg,
+  //   rgba(255, 255, 255, 1),
+  //   rgba(255, 255, 255, 1),
+  //   rgba(255, 255, 255, 0.55),
+  //   transparent
+  // );
 }
-#featured:before {
+#ui__featured--front__image:before {
   width: 40%;
   height: 100%;
   min-height: 350px;
   left: 0;
   top: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0.55),
-    transparent
-  );
+  background: url("/src/images/mask_left.png") no-repeat left center transparent;
+  background-size: 100% 100%;
+  // background: linear-gradient(
+  //   90deg,
+  //   rgba(255, 255, 255, 1),
+  //   rgba(255, 255, 255, 1),
+  //   rgba(255, 255, 255, 0.55),
+  //   transparent
+  // );
 }

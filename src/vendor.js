@@ -14,7 +14,8 @@ window.defaults = {
   data_url: "https://next.json-generator.com/api/json/get/V13KQEB-c",
   menu: "",
   menu_default: "home",
-  preloader: 5000,
+  featured: "",
+  preloader: 1250,
   homepage: "",
   items: "",
   collections: "",
@@ -25,6 +26,7 @@ window.defaults = {
     brand: "ui__brand",
     menu: "ui__menu",
     events: "ui__event",
+    featured: "ui__featured",
   },
   os: null,
   introsound: new Audio("/src/audio/bell.wav"),
@@ -90,11 +92,13 @@ window.init = {
         return (
           init.ui.preloader.html() +
           `
-            <div id="ui" class="row h-100 w-100 g-0 no-gutters align-items-center justify-content-center position-fixed top-0 start-0">
+            <div id="ui" class="row h-100 w-100 g-0 no-gutters align-items-center justify-content-center position-fixed top-0 start-0" g-0>
                 <div id="ui__left" class="col-auto">` +
           init.ui.menu.html() +
           `</div>
-                <div id="ui__rigth" class="col h-100"></div>
+                <div id="ui__rigth" class="col h-100">` +
+          init.ui.featured.html() +
+          `</div>
             </div>
             ` +
           init.utils.brand.html() +
@@ -136,6 +140,63 @@ window.init = {
       },
       hide: function () {
         init.ui.update.hide("#" + this.id);
+      },
+    },
+    featured: {
+      id: defaults.ui.featured,
+      html: function (content) {
+        defaults.featured =
+          `<div id="` +
+          init.ui.featured.id +
+          `" class="row g-0 h-100 w-100 position-relative">
+            <div class="col w-100 h-100">
+              <div class="` +
+          init.ui.featured.id +
+          `--front w-100 h-100 ">
+                <div class="` +
+          init.ui.featured.id +
+          `--front__section">
+                  <div id="` +
+          init.ui.featured.id +
+          `--front__image" class="position-fixed ui__img img-bg-fit img-bg-fit w-100 h-75" style="background-image:url('` +
+          defaults.data.ui.home.sections.featured.content.image +
+          `')"></div>
+                  <div id="` +
+          init.ui.featured.id +
+          `--front__content" class="position-relative">
+                    <div class="row flex-column g-0 pt-5">
+                      <div class="col">
+                        <div class="row justify-content-center align-items-center mt-5">
+                            <div class="col-auto">` +
+          defaults.data.ui.home.sections.featured.content.icon +
+          `</div><div class="col"> <span class="text-blue-2 ff-os-b fs-lg">` +
+          defaults.data.ui.home.sections.featured.content.label +
+          `</span></div>
+                        </div>
+                        <div class="fs-xxl text-block-1 ff-os-b m-0 p-0 mb-2 text-sd-md">` +
+          defaults.data.ui.home.sections.featured.content.title +
+          `</div>
+                        <div class="fs-xl text-block-1 m-0 p-0 mb-3 text-sd-md">` +
+          defaults.data.ui.home.sections.featured.content.subtitle +
+          `</div>
+                        <div class="fs-lg text-block-1 m-0 p-0 mb-3 text-sd-md">` +
+          defaults.data.ui.home.sections.featured.content.description +
+          `</div>
+                        <div class="fs-md text-block-1 ff-os-sb m-0 p-0 text-grey-4 text-sd-md">` +
+          defaults.data.ui.home.sections.featured.content.note +
+          `</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="` +
+          init.ui.featured.id +
+          `--back w-100 h-100 "></div>
+            </div>
+          </div>
+        `;
+        return defaults.featured;
       },
     },
     menu: {
@@ -231,13 +292,16 @@ window.init = {
           init.ui.general.inject();
         })
         .then(function (json) {
-          init.interactivity();
-        })
-        .then(function (json) {
-          setTimeout(function () {
-            defaults.introsound.play();
-            init.ui.preloader.hide();
-          }, defaults.preloader);
+          $(root)
+            .imagesLoaded({ background: ".ui__img" })
+            .always(function (instance) {})
+            .done(function (instance) {
+              init.interactivity();
+              setTimeout(function () {
+                defaults.introsound.play();
+                init.ui.preloader.hide();
+              }, defaults.preloader);
+            });
         })
         .catch(function (error) {
           console.log(error);

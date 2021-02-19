@@ -1,5 +1,6 @@
 import * as OfflinePluginRuntime from "offline-plugin/runtime";
 import axios from "axios";
+import imagesloaded from "imagesloaded";
 
 import "@fortawesome/fontawesome-pro/js/fontawesome";
 import "@fortawesome/fontawesome-pro/js/solid";
