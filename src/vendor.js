@@ -34,7 +34,6 @@ window.defaults = {
   introsound: new Audio("/src/audio/bell.wav"),
 };
 console.log(_personalSignature());
-console.log("-- APP LOADED --");
 
 window.init = {
   utils: {
@@ -179,15 +178,28 @@ window.init = {
             <div class="col w-100 h-100">
               <div class="` +
           init.ui.featured.id +
-          `--front w-100 h-100 ">
+          `--front w-100 h-75 position-relative  overflow-hidden">
                 <div class="` +
           init.ui.featured.id +
-          `--front__section">
+          `--front__section h-100 position-relative">
                   <div id="` +
           init.ui.featured.id +
-          `--front__image" class="position-fixed ui__img img-bg-fit img-bg-fit w-100 h-75" style="background-image:url('` +
+          `--front__image" class="position-absolute ui__img img-bg-fit img-bg-fit w-100 h-100" style="background-image:url('` +
           defaults.data.ui.home.sections.featured.content.image +
           `')"></div>
+          
+<div id="` +
+          init.ui.featured.id +
+          `--front__mask" class="position-absolute w-100 h-100">
+            <div id="` +
+          init.ui.featured.id +
+          `--front__mask--left"></div>
+            <div id="` +
+          init.ui.featured.id +
+          `--front__mask--bottom"></div>
+          </div>
+
+
                   <div id="` +
           init.ui.featured.id +
           `--front__content" class="position-relative">
@@ -588,4 +600,3 @@ function _personalSignature() {
  ************************************************************/
 `;
 }
-console.log("-- APP END --");
