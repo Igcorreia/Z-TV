@@ -9,6 +9,9 @@ import "@fortawesome/fontawesome-pro/js/brands";
 
 import "./index.html";
 import "./index.scss";
+
+import "./scripts/variables";
+import "./scripts/os";
 import "./scripts/script";
 
 OfflinePluginRuntime.install();
