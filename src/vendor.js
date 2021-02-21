@@ -1,26 +1,30 @@
 window.defaults = {
+  mode: "prod",
+  root: "#root",
+  os: null,
+  data: null,
+  data_url: "https://next.json-generator.com/api/json/get/V13KQEB-c",
+  introsound: new Audio("/src/audio/bell.wav"),
   debug: {
     active: false,
     auto_refresh: true,
     key_press: true,
     os_details: true,
   },
-  mode: "prod",
-  root: "#root",
-  show_suffix: "show",
-  hide_suffix: "hide",
-  active_suffix: "active",
-  prepare_animate_suffix: "prepare-animation",
-  animate_suffix: "animate",
-  data: null,
-  data_url: "https://next.json-generator.com/api/json/get/V13KQEB-c",
-  menu: "",
-  menu_default: "home",
-  featured: "",
-  preloader: 1250,
-  homepage: "",
-  items: "",
-  collections: "",
+  suffix: {
+    show: "show",
+    hide: "hide",
+    active: "active",
+    prepare_animate: "prepare-animation",
+    animate: "animate",
+  },
+  sections: {
+    menu: "",
+    menu_default: "home",
+    featured: "",
+    preloader_status: false,
+    preloader_aimation_duration: 1250,
+  },
   ui: {
     debug: "ui__debug",
     preloader: "ui__preloader",
@@ -29,9 +33,8 @@ window.defaults = {
     menu: "ui__menu",
     events: "ui__event",
     featured: "ui__featured",
+    scrollers: "ui__scrollers",
   },
-  os: null,
-  introsound: new Audio("/src/audio/bell.wav"),
 };
 console.log(_personalSignature());
 
@@ -99,6 +102,7 @@ window.init = {
           `</div>
                 <div id="ui__rigth" class="col h-100">` +
           init.ui.featured.html() +
+          init.ui.scrollers.html() +
           `</div>
             </div>
             ` +
@@ -113,19 +117,20 @@ window.init = {
     preloader: {
       id: defaults.ui.preloader,
       html: function () {
-        return (
-          `<div id="` +
-          init.ui.preloader.id +
-          `" class="w-100 h-100 row bg-white justify-content-center align-items-center g-0 position-fixed ` +
-          defaults.ui.events +
-          "--" +
-          defaults.show_suffix +
-          `">
+        if (defaults.sections.preloader_status == true) {
+          return (
+            `<div id="` +
+            init.ui.preloader.id +
+            `" class="w-100 h-100 row bg-white justify-content-center align-items-center g-0 position-fixed ` +
+            defaults.ui.events +
+            "--" +
+            defaults.suffix.show +
+            `">
             <div class="col-auto text-center">
               <div class="mb-4">
           ` +
-          defaults.data.branding.logo.svg +
-          `
+            defaults.data.branding.logo.svg +
+            `
             </div>  
             <div class="ui-preloader__label ff-os-b fs-sm">
               <p>
@@ -134,7 +139,19 @@ window.init = {
             </div>
             </div>
           </div>`
-        );
+          );
+        } else {
+          return (
+            `<div id="` +
+            init.ui.preloader.id +
+            `" class="d-none` +
+            defaults.ui.events +
+            "--" +
+            defaults.suffix.hide +
+            `"></div>
+          `
+          );
+        }
       },
       show: function () {
         init.ui.update.show("#" + this.id);
@@ -171,14 +188,14 @@ window.init = {
           return buttons;
         };
 
-        defaults.featured =
+        defaults.sections.featured =
           `<div id="` +
           init.ui.featured.id +
           `" class="row g-0 h-100 w-100 position-relative">
             <div class="col w-100 h-100">
               <div class="` +
           init.ui.featured.id +
-          `--front w-100 h-75 position-relative  overflow-hidden">
+          `--front w-100 h-100 position-relative  overflow-hidden">
                 <div class="` +
           init.ui.featured.id +
           `--front__section h-100 position-relative">
@@ -199,13 +216,15 @@ window.init = {
           `--front__mask--bottom"></div>
           </div>
 
+          <div class="row h-65 w-100 justify-content-start align-items-center g-0">
+    <div class="col-auto">
 
                   <div id="` +
           init.ui.featured.id +
           `--front__content" class="position-relative">
-                    <div class="row flex-column g-0 pt-5">
+                    <div class="row flex-column g-0">
                       <div class="col">
-                        <div class="row justify-content-center align-items-center mt-5">
+                        <div class="row justify-content-center align-items-center">
                             <div class="col-auto">` +
           defaults.data.ui.home.sections.featured.content.icon +
           `</div><div class="col"> <span class="text-blue-2 ff-os-b fs-lg">` +
@@ -234,23 +253,34 @@ window.init = {
                   </div>
                 </div>
               </div>
-              <div class="` +
-          init.ui.featured.id +
-          `--back w-100 h-100 "></div>
+ </div>
+              </div>
             </div>
           </div>
         `;
-        return defaults.featured;
+        return defaults.sections.featured;
       },
       animate: function (id) {
         init.ui.update.animate(id);
+      },
+    },
+    scrollers: {
+      id: defaults.ui.scrollers,
+      html: function () {
+        return `
+            <div class="row h-40 g-0 justify-content-start align-items-start position-fixed bottom-0 w-100">
+                <div class="col">
+                  <div class="">Each Section</div>
+                </div>
+            </div>
+        `;
       },
     },
     menu: {
       id: defaults.ui.menu,
       html: function () {
         for (i = 0; i < defaults.data.menu.length; i++) {
-          defaults.menu +=
+          defaults.sections.menu +=
             '<div class="col"><a id="' +
             defaults.ui.menu +
             "--" +
@@ -268,14 +298,14 @@ window.init = {
                 </div>
             `;
         }
-        defaults.menu =
+        defaults.sections.menu =
           `<nav id="ui-left__menu">
             <div class="row flex-column g-0 no-gutters mx-5 text-center">` +
-          defaults.menu +
+          defaults.sections.menu +
           `</div>
           </nav>`;
 
-        return defaults.menu;
+        return defaults.sections.menu;
       },
       change: function (id) {
         init.ui.update.deactivate("." + defaults.ui.menu + "--menuitem");
@@ -285,25 +315,25 @@ window.init = {
     update: {
       show: function (sel) {
         requestAnimationFrame(function () {
-          $(sel).addClass(defaults.ui.events + "--" + defaults.show_suffix);
-          $(sel).removeClass(defaults.ui.events + "--" + defaults.hide_suffix);
+          $(sel).addClass(`${defaults.ui.events}--${defaults.suffix.show}`);
+          $(sel).removeClass(`${defaults.ui.events}--${defaults.suffix.hide}`);
         });
       },
       hide: function (sel) {
         requestAnimationFrame(function () {
-          $(sel).addClass(defaults.ui.events + "--" + defaults.hide_suffix);
-          $(sel).removeClass(defaults.ui.events + "--" + defaults.show_suffix);
+          $(sel).addClass(defaults.ui.events + "--" + defaults.suffix.hide);
+          $(sel).removeClass(defaults.ui.events + "--" + defaults.suffix.show);
         });
       },
       activate: function (sel) {
         requestAnimationFrame(function () {
-          $(sel).addClass(defaults.ui.events + "--" + defaults.active_suffix);
+          $(sel).addClass(defaults.ui.events + "--" + defaults.suffix.active);
         });
       },
       deactivate: function (sel) {
         requestAnimationFrame(function () {
           $(sel).removeClass(
-            defaults.ui.events + "--" + defaults.active_suffix
+            defaults.ui.events + "--" + defaults.suffix.active
           );
         });
       },
@@ -311,10 +341,10 @@ window.init = {
         requestAnimationFrame(function () {
           $(sel)
             .addClass(
-              defaults.ui.events + "--" + defaults.prepare_animate_suffix
+              defaults.ui.events + "--" + defaults.suffix.prepare_animate
             )
             .delay(1000)
-            .addClass(defaults.ui.events + "--" + defaults.animate_suffix);
+            .addClass(defaults.ui.events + "--" + defaults.suffix.animate);
         });
       },
     },
@@ -357,7 +387,7 @@ window.init = {
               setTimeout(function () {
                 defaults.introsound.play();
                 init.ui.preloader.hide();
-              }, defaults.preloader);
+              }, defaults.sections.preloader_aimation_duration);
             });
         })
         .catch(function (error) {
@@ -536,7 +566,7 @@ function _osDetails() {
       };
     })();
 
-    $("#" + defaults.ui.debug).append(
+    $(`#${defaults.ui.debug}`).append(
       JSON.stringify(
         {
           browser: defaults.os.browser,
@@ -553,8 +583,9 @@ function _osDetails() {
 function _osKeyPress() {
   if (defaults.debug.key_press === true) {
     document.addEventListener("keydown", function (event) {
+      const newLocal = event.which;
       $("#" + defaults.ui.debug).append(
-        "<div> Key Pressed Codd: " + event.which + "</div>"
+        `<div> Key Pressed Codd: ${newLocal}</div>`
       );
     });
   }
@@ -572,12 +603,14 @@ function _osAutoRefresh() {
 
 function _menuChange(id, path) {
   if ((id == undefined || id == null) && (path == undefined || path == null)) {
-    init.ui.menu.change("#" + defaults.ui.menu + "--" + defaults.menu_default);
+    init.ui.menu.change(
+      `#${defaults.ui.menu}--${defaults.sections.menu_default}`
+    );
   }
 }
 
 function _featuredChange(content) {
-  init.ui.featured.animate("#" + defaults.ui.featured);
+  init.ui.featured.animate(`#${defaults.ui.featured}`);
 }
 
 function _personalSignature() {
