@@ -1,4 +1,5 @@
-# Welcome to Everything as Netflix
+# Everything as Netflix
+### Welcome 👋
 
 This is pure an exercise to try to develop any interface like Netflix.
 
@@ -6,7 +7,7 @@ This is pure an exercise to try to develop any interface like Netflix.
 
 ## Design / UI / Demo
 *   UI Design in Behance
-*   Live Demo
+*   As Zillow Live Demo
 ## Target OS
 
 The target is Chrome 48 wich is used by a lot of Samsung Smart TV's
@@ -35,3 +36,21 @@ Use se number 2,4,6,8 to navigate in you TV Browser:
 - Load everything on GPU
 - Make it as dynamic as possible, data source should be enougth to change evertyhing
 - Use a modern stack like Webpack, Babel, etc (type=module does not work)
+
+# Credits
+
+​​​​​​​All the logo and brands are copyright by Zillow, Inc. To learn more about the copyright visit: https://www.zillowgroup.com/terms-of-use/
+
+Photos from Unsplash
+
+Icons some hand made other from FontAwesome
+
+
+### FOLLOW
+
+Twitter ~ Dribbble ~ Codepen
+
+### CONNECT
+
+@igcorreia
+(Telegram, Instagram or Snapchat)
