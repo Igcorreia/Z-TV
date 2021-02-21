@@ -5,14 +5,14 @@ This is pure an exercise to try to develop any interface like Netflix.
 
 ![Dinamyc](/src/images/git_cover.png)
 
-## Design / UI / Demo
+## 🪄 Design / UI / Demo
 *   UI Design in Behance
 *   As Zillow Live Demo
-## Target OS
+## 🖥️ Target OS
 
 The target is Chrome 48 wich is used by a lot of Samsung Smart TV's
 
-### Interactivity
+### 👉 Interactivity
 
 Use se number 2,4,6,8 to navigate in you TV Browser:
 
