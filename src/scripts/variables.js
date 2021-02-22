@@ -40,7 +40,7 @@ window.defaults = {
         gutter: 25,
       },
     },
-    preloader_status: true,
+    preloader_status: false,
     preloader_aimation_duration: 1250,
   },
   ui: {
@@ -52,6 +52,9 @@ window.defaults = {
     events: "ui__event",
     featured: "ui__featured",
     scrollers: "ui__scrollers",
+  },
+  interactive: {
+    virtual_menu: [],
   },
   signature: `
 /***********************************************************
