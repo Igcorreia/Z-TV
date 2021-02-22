@@ -1,19 +1,29 @@
-window._uiScroller = function (type, category, index) {
+window._uiScroller = function (type, category, index, scrollerIndex) {
   const scroller = defaults.data.content[category][index];
   const content = scroller.content;
   const format = scroller.format;
   const title = scroller.title;
 
+  defaults.interactive.virtual_menu.content.push({
+    id: `${defaults.ui.scrollers}--${scrollerIndex}`,
+    format: format,
+    category: category,
+    active: false,
+    size: defaults.sections.scrollers_settings[format],
+    items: [],
+  });
+
   html = "";
   var items_html = "";
+
   if (type == "landscape") {
     scrollerH = defaults.sections.scrollers_settings.landscape.height;
     scrollerW = defaults.sections.scrollers_settings.landscape.width;
     scollerG = defaults.sections.scrollers_settings.landscape.gutter;
   } else if (type == "button") {
-    scrollerH = defaults.sections.scrollers_settings.buttons.height;
-    scrollerW = defaults.sections.scrollers_settings.buttons.width;
-    scollerG = defaults.sections.scrollers_settings.buttons.gutter;
+    scrollerH = defaults.sections.scrollers_settings.button.height;
+    scrollerW = defaults.sections.scrollers_settings.button.width;
+    scollerG = defaults.sections.scrollers_settings.button.gutter;
   } else if (type == "portrait") {
     scrollerH = defaults.sections.scrollers_settings.portrait.height;
     scrollerW = defaults.sections.scrollers_settings.portrait.width;
@@ -30,10 +40,18 @@ window._uiScroller = function (type, category, index) {
 
   if (type == "landscape") {
     for (let i = 0; i < content.length; i++) {
+      defaults.interactive.virtual_menu.content[scrollerIndex].items.push({
+        id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
+        type: "item",
+        active: false,
+      });
+
       item_x_pos = (scrollerW + scollerG) * i;
 
       items_html += `
-      <div class="scroller--items__item scroller--items__item--${i} bg-white position-absolute" style="height:${scrollerH}px; width:${scrollerW}px; transform:translate3d(${item_x_pos}px,0,0)">
+      <div id="${defaults.ui.scrollers}--${scrollerIndex}__item--${i}" class="scroller--items__item scroller--items__item--${i} ${defaults.ui.interactive} ${defaults.ui.interactive}--${i} bg-white position-absolute" 
+        data-interactive-type="content" data-interactive-item-index="${i}"
+      style="height:${scrollerH}px; width:${scrollerW}px; transform:translate3d(${item_x_pos}px,0,0)">
         <div class="row g-0 top--section h-70">
           <div class="col">
               <div class="row h-100 thumb g-0">
@@ -84,10 +102,17 @@ window._uiScroller = function (type, category, index) {
     }
   } else if (type == "button") {
     for (let i = 0; i < content.length; i++) {
+      defaults.interactive.virtual_menu.content[scrollerIndex].items.push({
+        id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
+        type: "item",
+        active: false,
+      });
       item_x_pos = (scrollerW + scollerG) * i;
 
       items_html += `
-      <div class="scroller--items__item scroller--items__item--${i} bg-white position-absolute" style="height:${scrollerH}px; width:${scrollerW}px; transform:translate3d(${item_x_pos}px,0,0)">
+      <div id="${defaults.ui.scrollers}--${scrollerIndex}__item--${i}" class="scroller--items__item scroller--items__item--${i} ${defaults.ui.interactive} ${defaults.ui.interactive}--${i} bg-white position-absolute" 
+      data-interactive-type="content" data-interactive-item-index="${i}"
+      style="height:${scrollerH}px; width:${scrollerW}px; transform:translate3d(${item_x_pos}px,0,0)">
         <div class="row g-0 top--section h-100 justify-content-center align-items-center text-center">
           <div class="col">
             <div class="ff-os-b fs-lg text-blue-2 text-uppercase">${content[i].title}</div>    
@@ -98,10 +123,17 @@ window._uiScroller = function (type, category, index) {
     }
   } else if (type == "portrait") {
     for (let i = 0; i < content.length; i++) {
+      defaults.interactive.virtual_menu.content[scrollerIndex].items.push({
+        id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
+        type: "item",
+        active: false,
+      });
       item_x_pos = (scrollerW + scollerG) * i;
 
       items_html += `
-      <div class="scroller--items__item scroller--items__item--${i} bg-white position-absolute" style="height:${scrollerH}px; width:${scrollerW}px; transform:translate3d(${item_x_pos}px,0,0)">
+      <div id="${defaults.ui.scrollers}--${scrollerIndex}__item--${i}" class="scroller--items__item scroller--items__item--${i} ${defaults.ui.interactive} ${defaults.ui.interactive}--${i} bg-white position-absolute" 
+      data-interactive-type="content" data-interactive-item-index="${i}"
+      style="height:${scrollerH}px; width:${scrollerW}px; transform:translate3d(${item_x_pos}px,0,0)">
         <div class="row g-0 top--section h-90">
           <div class="col">
               <div class="row h-100 thumb g-0">
@@ -145,7 +177,7 @@ window._uiScroller = function (type, category, index) {
   scroller_html = `
     <div class="row g-0 mb-4">
       <div class="col">
-        <div class="scroller ${type}" style="height:${scrollerH}px;">
+        <div class="scroller scroller--${scrollerIndex} ${type}" style="height:${scrollerH}px;">
           <div class="scroller--items">
              ${items_html}
           </div>

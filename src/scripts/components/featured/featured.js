@@ -9,12 +9,17 @@ window._featured = function () {
           i < defaults.data.ui.home.sections.featured.content.buttons.length;
           i++
         ) {
+          defaults.interactive.virtual_menu.featured.push({
+            id: `${init.ui.featured.id}__button--${i}`,
+            active: false,
+          });
+
           buttons +=
             `
               <div class="col-auto">
-                <div class="btn me-3 ` +
-            //defaults.data.ui.home.sections.featured.content.buttons[i].style +
-            ` ff-os-b fs-lg">
+                <div id="${init.ui.featured.id}__button--${i}" class="btn ${defaults.ui.interactive} ${defaults.ui.interactive}--${i} me-3 ff-os-b fs-lg"
+                data-interactive-type="featured" data-interactive-item-index="${i}"
+                >
                 <i class="fas fa-` +
             defaults.data.ui.home.sections.featured.content.buttons[i].icon +
             `"></i>

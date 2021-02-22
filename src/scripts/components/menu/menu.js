@@ -3,6 +3,12 @@ window._menu = function () {
     id: defaults.ui.menu,
     html: function () {
       for (i = 0; i < defaults.data.menu.length; i++) {
+        defaults.interactive.virtual_menu.menu.push({
+          id: defaults.ui.menu + "--" + defaults.data.menu[i].name,
+          type: "menu",
+          active: false,
+        });
+
         const newLocal =
           '<div class="col"><a id="' +
           defaults.ui.menu +
@@ -10,7 +16,9 @@ window._menu = function () {
           defaults.data.menu[i].name +
           `" class="` +
           defaults.ui.menu +
-          `--menuitem btn btn-link mb-32" href="` +
+          `--.uimenuitem btn btn-link mb-32 ${defaults.ui.interactive} ${defaults.ui.interactive}--${i}"
+            data-interactive-type="menu" data-interactive-item-index="${i}"
+          href="` +
           defaults.data.menu[i].path +
           `">` +
           defaults.data.menu[i].svg +

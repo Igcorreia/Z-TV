@@ -8,7 +8,8 @@ window._scroller = function () {
         defaults.sections.scrollers += _uiScroller(
           scrollers[i].type,
           scrollers[i].category,
-          scrollers[i].index
+          scrollers[i].index,
+          i
         );
       }
 

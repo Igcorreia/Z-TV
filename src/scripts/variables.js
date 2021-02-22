@@ -34,7 +34,7 @@ window.defaults = {
         width: 240,
         gutter: 25,
       },
-      buttons: {
+      button: {
         width: 150,
         height: 100,
         gutter: 25,
@@ -52,9 +52,19 @@ window.defaults = {
     events: "ui__event",
     featured: "ui__featured",
     scrollers: "ui__scrollers",
+    interactive: "ui__interactive",
   },
   interactive: {
-    virtual_menu: [],
+    virtual_menu: {
+      active_item: {
+        id: null,
+        type: null,
+        index: null,
+      },
+      menu: [],
+      content: [],
+      featured: [],
+    },
   },
   signature: `
 /***********************************************************
