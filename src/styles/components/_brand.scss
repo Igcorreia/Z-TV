@@ -1,3 +1,7 @@
 #ui__brand {
   z-index: 5;
+  padding: 240px 32px 32px 240px;
+  background: url(/src/images/brand_gradient.png) no-repeat right bottom
+    transparent;
+  background-size: contain;
 }

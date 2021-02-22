@@ -36,6 +36,8 @@ Use se number 2,4,6,8 to navigate in you TV Browser:
 - Load everything on GPU
 - Make it as dynamic as possible, data source should be enougth to change evertyhing
 - Use a modern stack like Webpack, Babel, etc (type=module does not work)
+- Fade Animation 
+- Different Type of Scrollers
 
 # Credits
 

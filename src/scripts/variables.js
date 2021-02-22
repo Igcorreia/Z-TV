@@ -22,6 +22,24 @@ window.defaults = {
     menu: "",
     menu_default: "home",
     featured: "",
+    scrollers: "",
+    scrollers_settings: {
+      landscape: {
+        height: 300,
+        width: 400,
+        gutter: 25,
+      },
+      portrait: {
+        height: 450,
+        width: 240,
+        gutter: 25,
+      },
+      buttons: {
+        width: 150,
+        height: 100,
+        gutter: 25,
+      },
+    },
     preloader_status: false,
     preloader_aimation_duration: 1250,
   },

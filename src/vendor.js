@@ -33,7 +33,7 @@ window.init = {
         return (
           `<div id="` +
           init.utils.brand.id +
-          `" class="position-fixed bottom-0 end-0 pb-5 pe-5 pt-5 ps-5 ">
+          `" class="position-fixed brand bottom-0 end-0 ">
             <div class="row g-0">
                 <div class="col">
                  ` +
@@ -153,7 +153,7 @@ window.init = {
         defaults.sections.featured =
           `<div id="` +
           init.ui.featured.id +
-          `" class="row g-0 h-100 w-100 position-relative">
+          `" class="row g-0 h-80 w-100 position-relative">
             <div class="col w-100 h-100">
               <div class="` +
           init.ui.featured.id +
@@ -163,7 +163,7 @@ window.init = {
           `--front__section h-100 position-relative">
                   <div id="` +
           init.ui.featured.id +
-          `--front__image" class="position-absolute ui__img img-bg-fit img-bg-fit w-100 h-100" style="background-image:url('` +
+          `--front__image" class="position-absolute ui__img img-bg-fit w-100 h-100" style="background-image:url('` +
           defaults.data.ui.home.sections.featured.content.image +
           `')"></div>
           
@@ -178,7 +178,7 @@ window.init = {
           `--front__mask--bottom"></div>
           </div>
 
-          <div class="row h-65 w-100 justify-content-start align-items-center g-0">
+          <div class="row h-60 w-100 justify-content-start align-items-center g-0">
     <div class="col-auto">
 
                   <div id="` +
@@ -186,14 +186,14 @@ window.init = {
           `--front__content" class="position-relative">
                     <div class="row flex-column g-0">
                       <div class="col">
-                        <div class="row justify-content-center align-items-center">
+                        <div class="row justify-content-center align-items-center g-0 mb-3">
                             <div class="col-auto">` +
           defaults.data.ui.home.sections.featured.content.icon +
-          `</div><div class="col"> <span class="text-blue-2 ff-os-b fs-lg">` +
+          `</div><div class="col"> <div class="text-blue-2 ff-os-b fs-lg mx-3">` +
           defaults.data.ui.home.sections.featured.content.label +
-          `</span></div>
+          `</div></div>
                         </div>
-                        <div class="fs-xxl text-block-1 ff-os-b m-0 p-0 mb-2 text-sd-md">` +
+                        <div class="fs-xxl text-block-1 ff-os-b m-0 p-0 mb-3 text-sd-md">` +
           defaults.data.ui.home.sections.featured.content.title +
           `</div>
                         <div class="fs-xl text-block-1 m-0 p-0 mb-3 text-sd-md">` +
@@ -229,13 +229,27 @@ window.init = {
     scrollers: {
       id: defaults.ui.scrollers,
       html: function () {
-        return `
-            <div class="row h-40 g-0 justify-content-start align-items-start position-fixed bottom-0 w-100">
+        const scrollers = defaults.data.ui.home.sections.main.content;
+
+        for (i = 0; i < scrollers.length; i++) {
+          defaults.sections.scrollers += _uiScroller(
+            scrollers[i].type,
+            scrollers[i].category,
+            scrollers[i].index
+          );
+        }
+
+        return (
+          `
+            <div class="row h-50 g-0 justify-content-start align-items-start position-fixed bottom-0 w-100">
                 <div class="col">
-                  <div class="">Each Section</div>
+                  <div class="">` +
+          defaults.sections.scrollers +
+          `</div>
                 </div>
             </div>
-        `;
+        `
+        );
       },
     },
     menu: {
@@ -414,4 +428,166 @@ function _menuChange(id, path) {
 
 function _featuredChange(content) {
   init.ui.featured.animate(`#${defaults.ui.featured}`);
+}
+
+function _uiScroller(type, category, index) {
+  const scroller = defaults.data.content[category][index];
+  const content = scroller.content;
+  const format = scroller.format;
+  const title = scroller.title;
+
+  html = "";
+  var items_html = "";
+  if (type == "landscape") {
+    scrollerH = defaults.sections.scrollers_settings.landscape.height;
+    scrollerW = defaults.sections.scrollers_settings.landscape.width;
+    scollerG = defaults.sections.scrollers_settings.landscape.gutter;
+  } else if (type == "button") {
+    scrollerH = defaults.sections.scrollers_settings.buttons.height;
+    scrollerW = defaults.sections.scrollers_settings.buttons.width;
+    scollerG = defaults.sections.scrollers_settings.buttons.gutter;
+  } else if (type == "portrait") {
+    scrollerH = defaults.sections.scrollers_settings.portrait.height;
+    scrollerW = defaults.sections.scrollers_settings.portrait.width;
+    scollerG = defaults.sections.scrollers_settings.portrait.gutter;
+  }
+
+  title_html = `
+      <div class="row m-0 p-0 g-0">
+        <div class="col">
+          <div class="ff-os-b fs-md mb-2">${title}</div>
+        </div>
+      </div>
+  `;
+
+  console.log(content);
+
+  if (type == "landscape") {
+    for (let i = 0; i < content.length; i++) {
+      item_x_pos = (scrollerW + scollerG) * i;
+
+      items_html += `
+      <div class="scroller--items__item scroller--items__item--${i} bg-white position-absolute" style="height:${scrollerH}px; width:${scrollerW}px; transform:translate3d(${item_x_pos}px,0,0)">
+        <div class="row g-0 top--section h-70">
+          <div class="col">
+              <div class="row h-100 thumb g-0">
+                <div class="col position-relative">
+                  <div class="thumbnail position-absolute ui__img img-bg-fit w-100 h-100" style="background-image:url('${content[i].thumb}')"></div>
+                    <div class="dark-mask position-absolute h-50 w-100 bottom-0 ui__img"></div>
+                      <div class="row g-0 position-absolute w-100 bottom-0">
+                        <div class="col title">
+                          <div class="text-white ff-os-b fs-md ms-3 mb-3 text-truncate">
+                            ${content[i].title}
+                          </div>
+                        </div>
+                        <div class="col-auto icon">
+                          <div class="text-white me-3 pb-3 active-icon position-relative">
+                            ${content[i].icon}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="row g-0 bottom--section h-30 align-items-center">
+            <div class="col-auto w-100">
+              <div class="row flex-column g-0">
+                <div class="col">
+                  <div class="ms-3 text-black-1 text-uppercase ff-os-b fs-xxs text-truncate">
+                    ${content[i].subtitle}
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="ms-3 text-black-1 ff-os-r fs-xxs mt-1 text-truncate">
+                    ${content[i].description}
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="ms-3 text-grey-3 text-uppercase ff-os-b fs-xxs mt-1 text-truncate">
+                    ${content[i].note}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    `;
+    }
+  } else if (type == "button") {
+    for (let i = 0; i < content.length; i++) {
+      item_x_pos = (scrollerW + scollerG) * i;
+
+      items_html += `
+      <div class="scroller--items__item scroller--items__item--${i} bg-white position-absolute" style="height:${scrollerH}px; width:${scrollerW}px; transform:translate3d(${item_x_pos}px,0,0)">
+        <div class="row g-0 top--section h-100 justify-content-center align-items-center text-center">
+          <div class="col">
+            <div class="ff-os-b fs-lg text-blue-2 text-uppercase">${content[i].title}</div>    
+          </div>
+        </div>
+      </div>
+    `;
+    }
+  } else if (type == "portrait") {
+    for (let i = 0; i < content.length; i++) {
+      item_x_pos = (scrollerW + scollerG) * i;
+
+      items_html += `
+      <div class="scroller--items__item scroller--items__item--${i} bg-white position-absolute" style="height:${scrollerH}px; width:${scrollerW}px; transform:translate3d(${item_x_pos}px,0,0)">
+        <div class="row g-0 top--section h-90">
+          <div class="col">
+              <div class="row h-100 thumb g-0">
+                <div class="col position-relative">
+                  <div class="thumbnail position-absolute ui__img img-bg-fit w-100 h-100" style="background-image:url('${content[i].thumb}')"></div>
+                    <div class="dark-mask position-absolute h-50 w-100 bottom-0 ui__img"></div>
+                      <div class="row g-0 position-absolute w-100 bottom-0">
+                        <div class="col-9 title">
+                          <div class="text-white ff-os-b fs-md ms-3 mb-3 text-truncate">
+                            ${content[i].title}
+                          </div>
+                        </div>
+                        <div class="col-3 icon text-center">
+                          <div class="text-white me-3 pb-3 active-icon position-relative">
+                            ${content[i].icon}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="row g-0 bottom--section h-10 align-items-center">
+            <div class="col-auto w-100">
+              <div class="row flex-column g-0">
+                <div class="col">
+                  <div class="ms-3 text-black-1 text-uppercase ff-os-b fs-xxs text-truncate">
+                    ${content[i].subtitle}
+                  </div>
+                </div>
+
+               
+              </div>
+            </div>
+          </div>
+        </div>
+    `;
+    }
+  }
+
+  scroller_html = `
+    <div class="row g-0 mb-4">
+      <div class="col">
+        <div class="scroller ${type}" style="height:${scrollerH}px;">
+          <div class="scroller--items">
+             ${items_html}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  html = title_html + scroller_html;
+  return html;
 }
