@@ -6,16 +6,10 @@ window.init = {
       id: defaults.ui.debug,
       html: function () {
         if (defaults.debug.active === true) {
-          return (
-            `<div id="` +
-            init.utils.debug.id +
-            `" class="position-fixed text-white"></div>
-            <div id="` +
-            init.utils.debug.id +
-            `__horazion" class="position-fixed"></div>
+          return `<div id="${init.utils.debug.id}" class="position-fixed text-white"></div>
+            <div id="${init.utils.debug.id}__horazion" class="position-fixed"></div>
         </div>
-        `
-          );
+        `;
         } else {
           return "";
         }
@@ -274,17 +268,14 @@ window.init = {
                 </div>
             `;
         }
-        defaults.sections.menu =
-          `<nav id="ui-left__menu">
-            <div class="row flex-column g-0 no-gutters mx-5 text-center">` +
-          defaults.sections.menu +
-          `</div>
-          </nav>`;
+        defaults.sections.menu = `<div id="ui-left__menu">
+            <div class="row flex-column g-0 no-gutters mx-5 text-center">${defaults.sections.menu}</div>
+          </div>`;
 
         return defaults.sections.menu;
       },
       change: function (id) {
-        init.ui.update.deactivate("." + defaults.ui.menu + "--menuitem");
+        init.ui.update.deactivate(`.${defaults.ui.menu}--menuitem`);
         init.ui.update.activate(id);
       },
     },
@@ -309,7 +300,7 @@ window.init = {
       deactivate: function (sel) {
         requestAnimationFrame(function () {
           $(sel).removeClass(
-            defaults.ui.events + "--" + defaults.suffix.active
+            `${defaults.ui.events}--${defaults.suffix.active}`
           );
         });
       },
@@ -317,10 +308,10 @@ window.init = {
         requestAnimationFrame(function () {
           $(sel)
             .addClass(
-              defaults.ui.events + "--" + defaults.suffix.prepare_animate
+              `${defaults.ui.events}--${defaults.suffix.prepare_animate}`
             )
             .delay(1000)
-            .addClass(defaults.ui.events + "--" + defaults.suffix.animate);
+            .addClass(`${defaults.ui.events}--${defaults.suffix.animate}`);
         });
       },
     },
@@ -381,7 +372,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
 function _osDetails() {
   if (defaults.debug.os_details === true) {
-    defaults.os = _os();
+    defaults.os = window._os();
 
     $(`#${defaults.ui.debug}`).append(
       JSON.stringify(

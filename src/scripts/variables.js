@@ -40,7 +40,7 @@ window.defaults = {
         gutter: 25,
       },
     },
-    preloader_status: false,
+    preloader_status: true,
     preloader_aimation_duration: 1250,
   },
   ui: {

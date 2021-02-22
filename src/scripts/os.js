@@ -1,4 +1,4 @@
-function _os() {
+window._os = function () {
   //rendering engines
   var engine = {
     ie: 0,
@@ -157,4 +157,4 @@ function _os() {
     browser: browser,
     system: system,
   };
-}
+};
