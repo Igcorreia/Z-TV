@@ -36,10 +36,10 @@ window._menu = function () {
 
       return defaults.sections.menu;
     },
-    change: function (id) {
-      init.ui.update.deactivate(`.${defaults.ui.menu}--menuitem`);
-      init.ui.update.activate(id);
-    },
+    // change: function (id) {
+    //   init.ui.update.deactivate(`.${defaults.ui.menu}--menuitem`);
+    //   init.ui.update.activate(id);
+    // },
   };
 
   return func;

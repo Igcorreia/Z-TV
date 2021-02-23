@@ -49,13 +49,8 @@ window.init = {
     },
   },
   interactivity: function () {
-    if (defaults.debug.active === true) {
-      _osDetails();
-      _osKeyPress();
-      _osAutoRefresh();
-    }
-    _featuredChange();
-    _menuChange();
+    // _featuredChange();
+    // _menuChange();
     _navigation();
   },
   fetchdata: new Promise(function (resolve, reject) {
@@ -101,53 +96,14 @@ window.addEventListener("DOMContentLoaded", function () {
   init.startup();
 });
 
-function _osDetails() {
-  if (defaults.debug.os_details === true) {
-    defaults.os = window._os();
+// function _menuChange(id, path) {
+//   if ((id == undefined || id == null) && (path == undefined || path == null)) {
+//     init.ui.menu.change(
+//       `#${defaults.ui.menu}--${defaults.sections.menu_default}`
+//     );
+//   }
+// }
 
-    $(`#${defaults.ui.debug}`).append(
-      JSON.stringify(
-        {
-          browser: defaults.os.browser,
-          engine: defaults.os.engine,
-          system: defaults.os.system,
-        },
-        null,
-        2
-      )
-    );
-  }
-}
-
-function _osKeyPress() {
-  if (defaults.debug.key_press === true) {
-    document.addEventListener("keydown", function (event) {
-      const newLocal = event.which;
-      $("#" + defaults.ui.debug).append(
-        `<div> Key Pressed Codd: ${newLocal}</div>`
-      );
-    });
-  }
-}
-
-function _osAutoRefresh() {
-  if (defaults.debug.auto_refresh === true) {
-    if (defaults.os.system.x11 == true) {
-      setInterval(function () {
-        window.location = window.location;
-      }, 5000);
-    }
-  }
-}
-
-function _menuChange(id, path) {
-  if ((id == undefined || id == null) && (path == undefined || path == null)) {
-    init.ui.menu.change(
-      `#${defaults.ui.menu}--${defaults.sections.menu_default}`
-    );
-  }
-}
-
-function _featuredChange(content) {
-  init.ui.featured.animate(`#${defaults.ui.featured}`);
-}
+// function _featuredChange(content) {
+//   init.ui.featured.animate(`#${defaults.ui.featured}`);
+// }

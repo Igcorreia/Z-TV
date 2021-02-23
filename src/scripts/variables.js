@@ -6,7 +6,7 @@ window.defaults = {
   data_url: "https://next.json-generator.com/api/json/get/V13KQEB-c",
   introsound: new Audio("/src/audio/bell.wav"),
   debug: {
-    active: false,
+    active: true,
     auto_refresh: true,
     key_press: true,
     os_details: true,
