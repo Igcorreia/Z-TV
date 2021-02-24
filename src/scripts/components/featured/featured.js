@@ -11,7 +11,8 @@ window._featured = function () {
         ) {
           defaults.interactive.virtual_menu.featured.push({
             id: `${init.ui.featured.id}__button--${i}`,
-            active: false,
+            // active: false,
+            type: "featured",
           });
 
           buttons +=

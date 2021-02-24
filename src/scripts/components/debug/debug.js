@@ -58,7 +58,7 @@ function _osAutoRefresh() {
 function _osKeyPress() {
   document.addEventListener("keydown", function (event) {
     const newLocal = event.which;
-    $("#" + defaults.ui.debug).append(
+    $("#" + defaults.ui.debug).prepend(
       `<div> Key Pressed Codd: ${newLocal}</div>`
     );
   });

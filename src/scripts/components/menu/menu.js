@@ -6,7 +6,7 @@ window._menu = function () {
         defaults.interactive.virtual_menu.menu.push({
           id: defaults.ui.menu + "--" + defaults.data.menu[i].name,
           type: "menu",
-          active: false,
+          // active: false,
         });
 
         const newLocal =

@@ -60,6 +60,7 @@ window.defaults = {
         id: null,
         type: null,
         index: null,
+        items: [],
       },
       menu: [],
       content: [],

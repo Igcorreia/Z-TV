@@ -8,7 +8,8 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
     id: `${defaults.ui.scrollers}--${scrollerIndex}`,
     format: format,
     category: category,
-    active: false,
+    // active: false,
+    type: "content",
     size: defaults.sections.scrollers_settings[format],
     items: [],
   });
@@ -43,7 +44,8 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
       defaults.interactive.virtual_menu.content[scrollerIndex].items.push({
         id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
         type: "item",
-        active: false,
+        // active: false,
+        type: "content",
       });
 
       item_x_pos = (scrollerW + scollerG) * i;
@@ -105,7 +107,8 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
       defaults.interactive.virtual_menu.content[scrollerIndex].items.push({
         id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
         type: "item",
-        active: false,
+        // active: false,
+        type: "content",
       });
       item_x_pos = (scrollerW + scollerG) * i;
 
@@ -126,7 +129,8 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
       defaults.interactive.virtual_menu.content[scrollerIndex].items.push({
         id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
         type: "item",
-        active: false,
+        // active: false,
+        type: "content",
       });
       item_x_pos = (scrollerW + scollerG) * i;
 
