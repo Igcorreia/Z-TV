@@ -12,3 +12,27 @@
 .ui__menu--menuitem.ui__event--active .menu-bar {
   background-color: var(--blue-2);
 }
+
+.ui__interactive {
+  // box-shadow: 0 0 0 0 transparent inset !important;
+  // border-color: var(--blue-2);
+  position: relative;
+}
+
+.ui__interactive:after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  // box-shadow: 0 0 0 0 transparent inset !important;
+  border: solid 0px var(--blue-2);
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all var(--transition-xs);
+  border-radius: 5px;
+}
+
+.ui__interactive__item--active:after {
+  // box-shadow: 0 0 0 4px var(--blue-2) inset !important;
+  border: solid 4px var(--blue-2);
+}
