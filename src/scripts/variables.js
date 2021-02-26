@@ -1,5 +1,5 @@
 window.defaults = {
-  mode: "prod",
+  mode: "local",
   root: "#root",
   os: null,
   data: null,
@@ -7,9 +7,9 @@ window.defaults = {
   introsound: new Audio("/src/audio/bell.wav"),
   debug: {
     active: false,
-    auto_refresh: true,
-    key_press: true,
-    os_details: true,
+    auto_refresh: false,
+    key_press: false,
+    os_details: false,
   },
   suffix: {
     show: "show",
@@ -60,8 +60,15 @@ window.defaults = {
         id: null,
         type: null,
         index: null,
-        itemsIndex: null,
-        itemsId: null,
+        contentIndex: null,
+        contentChildItemsIndex: null,
+        contentChildItemsId: null,
+        menuIndex: null,
+        menuId: null,
+        lastIndex: null,
+        lastId: null,
+        lastType: null,
+
         items: [],
       },
       menu: [],
@@ -69,6 +76,7 @@ window.defaults = {
       featured: [],
     },
   },
+  signature_stauts: false,
   signature: `
 /***********************************************************
  ***********************************************************

@@ -1,4 +1,12 @@
-console.log(defaults.signature);
+if (defaults.signature_status == true) {
+  console.log(defaults.signature);
+}
+
+if (defaults.mode == "local") {
+  data_url = "/src/data/data.json";
+} else {
+  data_url = defaults.data_url;
+}
 
 window.init = {
   utils: {
@@ -55,7 +63,7 @@ window.init = {
   },
   fetchdata: new Promise(function (resolve, reject) {
     $.ajax({
-      url: defaults.data_url,
+      url: data_url,
       cache: false,
       success: function (json) {
         resolve(json);

@@ -17,6 +17,9 @@ window._debug = function () {
         return "";
       }
     },
+    prepend: function (data) {
+      $(`#${defaults.ui.debug}`).prepend(data);
+    },
     show: function () {
       init.ui.update.show(this.id);
     },
