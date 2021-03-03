@@ -16,7 +16,7 @@ window._menu = function () {
           defaults.data.menu[i].name +
           `" class="` +
           defaults.ui.menu +
-          `--.uimenuitem btn btn-link mb-32 ${defaults.ui.interactive} ${defaults.ui.interactive}--${i}"
+          `--uimenuitem btn btn-link mb-32 ${defaults.ui.interactive} ${defaults.ui.interactive}--${i}"
             data-interactive-type="menu" data-interactive-item-index="${i}"
           href="` +
           defaults.data.menu[i].path +

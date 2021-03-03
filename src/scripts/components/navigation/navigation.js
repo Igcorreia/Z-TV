@@ -6,9 +6,6 @@ window._navigation = function () {
   if (defaults.interactive.virtual_menu.active_item.id == null) {
     _chooseDefaultContent();
   }
-
-  // On KeyPress Invoke
-  _keyNavigation();
 };
 
 function _chooseDefaultContent() {
@@ -36,6 +33,8 @@ function _chooseDefaultContent() {
     lastType: defaults.interactive.virtual_menu.featured[0].type,
   };
 
+  // On KeyPress Invoke
+  _keyNavigation();
   _updateVirtualMenu();
 }
 
@@ -61,6 +60,7 @@ function _keyNavigation() {
 }
 
 function _navigateInterface(direction) {
+  console.table(defaults.interactive.virtual_menu.active_item);
   var nav = _prepareNavigation();
   var menu = defaults.interactive.virtual_menu.menu;
   var content = defaults.interactive.virtual_menu.content;
@@ -82,8 +82,8 @@ function _navigateInterface(direction) {
             nav.active_content_index,
             nav.active_content_childItemsIndex,
             nav.active_content_childItemsId,
-            nav.active_menu_id,
             nav.active_menu_index,
+            nav.active_menu_id,
             nav.last_item_index,
             nav.last_item_id,
             nav.last_item_type
