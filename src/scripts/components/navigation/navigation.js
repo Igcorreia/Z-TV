@@ -1,8 +1,6 @@
 const { type } = require("jquery");
 
 window._navigation = function () {
-  console.log("--load interactivity--");
-
   if (defaults.interactive.active.id == null) {
     _chooseDefaultContent();
   }
@@ -36,11 +34,6 @@ function _chooseDefaultContent() {
       index: 0,
       id: defaults.interactive.content[0].items[0].id,
     },
-    history: {
-      index: 0,
-      id: defaults.interactive.featured[0].id,
-      type: "featured",
-    },
     focus: {
       index: 0,
       id: defaults.interactive.featured[0].id,
@@ -48,9 +41,7 @@ function _chooseDefaultContent() {
     },
   };
 
-  // On KeyPress Invoke
   _keyNavigation();
-  //_updateVirtualMenu();
   _virtualMenu();
 }
 
@@ -83,18 +74,14 @@ function _navigateInterface(direction) {
   if (active.focus.type == "featured") {
     switch (direction) {
       case "up":
-        console.log("up");
         break;
       case "right":
         if (nav.featured_next_id != null) {
-          console.log("right");
           _virtualMenu(
             nav.featured_next_index,
             nav.featured_next_id,
             active.focus.type,
-            nav.featured_next_index,
-            nav.featured_next_id,
-            active.focus.type,
+
             null,
             null,
             nav.featured_next_index,
@@ -104,11 +91,7 @@ function _navigateInterface(direction) {
         break;
       case "left":
         if (nav.featured_prev_id != null) {
-          console.log("left");
           _virtualMenu(
-            nav.featured_prev_index,
-            nav.featured_prev_id,
-            active.focus.type,
             nav.featured_prev_index,
             nav.featured_prev_id,
             active.focus.type,
@@ -119,11 +102,7 @@ function _navigateInterface(direction) {
           );
         }
         if (nav.featured_prev_id == null) {
-          console.log("go to menu");
           _virtualMenu(
-            active.menu.index,
-            active.menu.id,
-            "menu",
             active.menu.index,
             active.menu.id,
             "menu",
@@ -133,11 +112,7 @@ function _navigateInterface(direction) {
         }
         break;
       case "down":
-        console.log("down");
         _virtualMenu(
-          active.item.index,
-          active.item.id,
-          "content",
           active.item.index,
           active.item.id,
           "content",
@@ -158,11 +133,7 @@ function _navigateInterface(direction) {
   if (active.focus.type == "menu") {
     switch (direction) {
       case "up":
-        console.log("up");
         _virtualMenu(
-          nav.menu_prev_index,
-          nav.menu_prev_id,
-          active.focus.type,
           nav.menu_prev_index,
           nav.menu_prev_id,
           active.focus.type,
@@ -171,11 +142,7 @@ function _navigateInterface(direction) {
         );
         break;
       case "right":
-        console.log("right");
         _virtualMenu(
-          active.featured.index,
-          active.featured.id,
-          "featured",
           active.featured.index,
           active.featured.id,
           "featured",
@@ -186,11 +153,7 @@ function _navigateInterface(direction) {
         );
         break;
       case "down":
-        console.log("down");
         _virtualMenu(
-          nav.menu_next_index,
-          nav.menu_next_id,
-          active.focus.type,
           nav.menu_next_index,
           nav.menu_next_id,
           active.focus.type,
@@ -199,8 +162,6 @@ function _navigateInterface(direction) {
         );
         break;
       case "left":
-        console.log("left");
-
         break;
     }
   }
@@ -208,12 +169,8 @@ function _navigateInterface(direction) {
   if (active.focus.type == "content") {
     switch (direction) {
       case "up":
-        console.log("up");
         if (nav.content_prev_item_id != null) {
           _virtualMenu(
-            nav.content_prev_item_index,
-            nav.content_prev_item_id,
-            active.focus.type,
             nav.content_prev_item_index,
             nav.content_prev_item_id,
             active.focus.type,
@@ -234,9 +191,6 @@ function _navigateInterface(direction) {
             active.featured.index,
             active.featured.id,
             "featured",
-            active.featured.index,
-            active.featured.id,
-            "featured",
             null,
             null,
             active.featured.index,
@@ -251,11 +205,7 @@ function _navigateInterface(direction) {
 
         break;
       case "right":
-        console.log("right");
         _virtualMenu(
-          nav.item_next_index,
-          nav.item_next_id,
-          active.focus.type,
           nav.item_next_index,
           nav.item_next_id,
           active.focus.type,
@@ -271,12 +221,8 @@ function _navigateInterface(direction) {
         );
         break;
       case "down":
-        console.log("down");
         //todo:down
         _virtualMenu(
-          nav.content_next_item_index,
-          nav.content_next_item_id,
-          active.focus.type,
           nav.content_next_item_index,
           nav.content_next_item_id,
           active.focus.type,
@@ -292,11 +238,7 @@ function _navigateInterface(direction) {
         );
         break;
       case "left":
-        console.log("left");
         _virtualMenu(
-          nav.item_prev_index,
-          nav.item_prev_id,
-          active.focus.type,
           nav.item_prev_index,
           nav.item_prev_id,
           active.focus.type,
@@ -407,8 +349,6 @@ function _prepareNavigation() {
         ? active.content.items[active.content.index - 1].id
         : null;
   }
-
-  console.log(nav);
   return nav;
 }
 
@@ -416,9 +356,6 @@ function _virtualMenu(
   focusIndex,
   focusId,
   focusType,
-  historyIndex,
-  historyId,
-  historyType,
   menuIndex,
   menuId,
   featuredIndex,
@@ -450,15 +387,6 @@ function _virtualMenu(
   if (contentItems != null && contentItems != undefined) {
     defaults.interactive.active.content.items = contentItems;
   }
-  if (historyIndex != null && historyIndex != undefined) {
-    defaults.interactive.active.history.index = historyIndex;
-  }
-  if (historyId != null && historyId != undefined) {
-    defaults.interactive.active.history.id = historyId;
-  }
-  if (historyType != null && historyType != undefined) {
-    defaults.interactive.active.history.type = historyType;
-  }
   if (focusIndex != null && focusIndex != undefined) {
     defaults.interactive.active.focus.index = focusIndex;
   }
@@ -468,7 +396,6 @@ function _virtualMenu(
   if (focusType != null && focusType != undefined) {
     defaults.interactive.active.focus.type = focusType;
   }
-  //ITEMS
   if (itemIndex != null && itemIndex != undefined) {
     defaults.interactive.active.item.index = itemIndex;
 
@@ -482,8 +409,6 @@ function _virtualMenu(
   if (itemId != null && itemId != undefined) {
     defaults.interactive.active.item.id = itemId;
   }
-
-  console.log(defaults.interactive.active);
   _focusUI();
 }
 
