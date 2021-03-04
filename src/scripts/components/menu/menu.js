@@ -3,7 +3,7 @@ window._menu = function () {
     id: defaults.ui.menu,
     html: function () {
       for (i = 0; i < defaults.data.menu.length; i++) {
-        defaults.interactive.virtual_menu.menu.push({
+        defaults.interactive.menu.push({
           id: defaults.ui.menu + "--" + defaults.data.menu[i].name,
           type: "menu",
           // active: false,

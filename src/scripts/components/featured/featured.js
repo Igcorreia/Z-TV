@@ -9,7 +9,7 @@ window._featured = function () {
           i < defaults.data.ui.home.sections.featured.content.buttons.length;
           i++
         ) {
-          defaults.interactive.virtual_menu.featured.push({
+          defaults.interactive.featured.push({
             id: `${init.ui.featured.id}__button--${i}`,
             // active: false,
             type: "featured",

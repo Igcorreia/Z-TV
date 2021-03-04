@@ -55,26 +55,12 @@ window.defaults = {
     interactive: "ui__interactive",
   },
   interactive: {
-    virtual_menu: {
-      active_item: {
-        id: null,
-        type: null,
-        index: null,
-        contentIndex: null,
-        contentChildItemsIndex: null,
-        contentChildItemsId: null,
-        menuIndex: null,
-        menuId: null,
-        lastIndex: null,
-        lastId: null,
-        lastType: null,
-
-        items: [],
-      },
-      menu: [],
-      content: [],
-      featured: [],
-    },
+    // virtual_menu: {
+    active: {},
+    menu: [],
+    content: [],
+    featured: [],
+    // },
   },
   signature_stauts: false,
   signature: `

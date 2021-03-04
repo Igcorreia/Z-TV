@@ -4,7 +4,7 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
   const format = scroller.format;
   const title = scroller.title;
 
-  defaults.interactive.virtual_menu.content.push({
+  defaults.interactive.content.push({
     id: `${defaults.ui.scrollers}--${scrollerIndex}`,
     format: format,
     category: category,
@@ -41,7 +41,7 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
 
   if (type == "landscape") {
     for (let i = 0; i < content.length; i++) {
-      defaults.interactive.virtual_menu.content[scrollerIndex].items.push({
+      defaults.interactive.content[scrollerIndex].items.push({
         id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
         type: "item",
         // active: false,
@@ -104,7 +104,7 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
     }
   } else if (type == "button") {
     for (let i = 0; i < content.length; i++) {
-      defaults.interactive.virtual_menu.content[scrollerIndex].items.push({
+      defaults.interactive.content[scrollerIndex].items.push({
         id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
         type: "item",
         // active: false,
@@ -126,7 +126,7 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
     }
   } else if (type == "portrait") {
     for (let i = 0; i < content.length; i++) {
-      defaults.interactive.virtual_menu.content[scrollerIndex].items.push({
+      defaults.interactive.content[scrollerIndex].items.push({
         id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
         type: "item",
         // active: false,
