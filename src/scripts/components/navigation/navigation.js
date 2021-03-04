@@ -209,6 +209,46 @@ function _navigateInterface(direction) {
     switch (direction) {
       case "up":
         console.log("up");
+        if (nav.content_prev_item_id != null) {
+          _virtualMenu(
+            nav.content_prev_item_index,
+            nav.content_prev_item_id,
+            active.focus.type,
+            nav.content_prev_item_index,
+            nav.content_prev_item_id,
+            active.focus.type,
+            null,
+            null,
+            null,
+            null,
+            nav.content_prev_index,
+            nav.content_prev_id,
+            null,
+            nav.content_prev_item_index,
+            nav.content_prev_item_id
+          );
+        }
+
+        if (nav.content_prev_item_id == null) {
+          _virtualMenu(
+            active.featured.index,
+            active.featured.id,
+            "featured",
+            active.featured.index,
+            active.featured.id,
+            "featured",
+            null,
+            null,
+            active.featured.index,
+            active.featured.id,
+            active.content.index,
+            active.content.id,
+            null,
+            active.item.index,
+            active.item.id
+          );
+        }
+
         break;
       case "right":
         console.log("right");
@@ -233,6 +273,23 @@ function _navigateInterface(direction) {
       case "down":
         console.log("down");
         //todo:down
+        _virtualMenu(
+          nav.content_next_item_index,
+          nav.content_next_item_id,
+          active.focus.type,
+          nav.content_next_item_index,
+          nav.content_next_item_id,
+          active.focus.type,
+          null,
+          null,
+          null,
+          null,
+          nav.content_next_index,
+          nav.content_next_id,
+          null,
+          nav.content_next_item_index,
+          nav.content_next_item_id
+        );
         break;
       case "left":
         console.log("left");
@@ -328,6 +385,26 @@ function _prepareNavigation() {
     nav[`item_prev_id`] =
       active.item.index > 0
         ? content[active.content.index].items[active.item.index - 1].id
+        : null;
+
+    //Next Content Item ID and Index
+    nav[`content_next_item_index`] =
+      active.content.index < content.length - 1
+        ? active.content.items[active.content.index + 1].index
+        : null;
+    nav[`content_next_item_id`] =
+      active.content.index < content.length - 1
+        ? active.content.items[active.content.index + 1].id
+        : null;
+
+    //Prev Content ID and Index
+    nav[`content_prev_item_index`] =
+      active.content.index > 0
+        ? active.content.items[active.content.index - 1].index
+        : null;
+    nav[`content_prev_item_id`] =
+      active.content.index > 0
+        ? active.content.items[active.content.index - 1].id
         : null;
   }
 
