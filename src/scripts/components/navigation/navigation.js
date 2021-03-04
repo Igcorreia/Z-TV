@@ -147,8 +147,9 @@ function _navigateInterface(direction) {
           null,
           active.content.index,
           active.content.id,
+          null,
           active.item.index,
-          active.item.index
+          active.item.id
         );
         break;
     }
@@ -203,6 +204,23 @@ function _navigateInterface(direction) {
         break;
     }
   }
+
+  if (active.focus.type == "content") {
+    switch (direction) {
+      case "up":
+        console.log("up");
+        break;
+      case "right":
+        console.log("right");
+        break;
+      case "down":
+        console.log("down");
+        break;
+      case "left":
+        console.log("left");
+        break;
+    }
+  }
 }
 
 function _prepareNavigation() {
@@ -211,7 +229,9 @@ function _prepareNavigation() {
   var types = ["menu", "featured", "content"];
   var positions = ["current", "prev", "next"];
   var values = ["index", "id"];
+  var content = defaults.interactive.content;
 
+  // General Sections / Types
   for (t = 0; t < types.length; t++) {
     const type = types[t];
     const typeIndex = active[type].index;
@@ -254,6 +274,27 @@ function _prepareNavigation() {
         }
       }
     }
+  }
+  // Scroller items
+  if (active.focus.type == "content") {
+    console.log("Prepare Items for Scrollers");
+    nav[`item_current_index`] = active.item.index;
+    nav[`item_current_id`] =
+      active.item.index < content[active.content.index].items.length - 1
+        ? active.item.id
+        : null;
+    nav[`item_next_index`] =
+      active.item.index < content[active.content.index].items.length - 1
+        ? active.item.index + 1
+        : null;
+    nav[`item_next_id`] =
+      content[active.content.index].items[active.item.index + 1].id;
+    nav[`item_prev_index`] =
+      active.item.index > 0 ? active.item.index - 1 : null;
+    nav[`item_prev_id`] =
+      active.item.index > 0
+        ? content[active.content.index].items[active.item.index - 1].id
+        : null;
   }
 
   console.log(nav);
