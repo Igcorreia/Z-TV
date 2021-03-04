@@ -43,9 +43,10 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
     for (let i = 0; i < content.length; i++) {
       defaults.interactive.content[scrollerIndex].items.push({
         id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
-        type: "item",
+        // type: "item",
         // active: false,
         type: "content",
+        index: i,
       });
 
       item_x_pos = (scrollerW + scollerG) * i;
@@ -106,9 +107,10 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
     for (let i = 0; i < content.length; i++) {
       defaults.interactive.content[scrollerIndex].items.push({
         id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
-        type: "item",
+        // type: "item",
         // active: false,
         type: "content",
+        index: i,
       });
       item_x_pos = (scrollerW + scollerG) * i;
 
@@ -128,9 +130,10 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
     for (let i = 0; i < content.length; i++) {
       defaults.interactive.content[scrollerIndex].items.push({
         id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
-        type: "item",
+        // type: "item",
         // active: false,
         type: "content",
+        index: i,
       });
       item_x_pos = (scrollerW + scollerG) * i;
 

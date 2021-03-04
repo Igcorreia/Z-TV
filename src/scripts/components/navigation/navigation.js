@@ -212,12 +212,47 @@ function _navigateInterface(direction) {
         break;
       case "right":
         console.log("right");
+        _virtualMenu(
+          nav.item_next_index,
+          nav.item_next_id,
+          active.focus.type,
+          nav.item_next_index,
+          nav.item_next_id,
+          active.focus.type,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          nav.item_next_index,
+          nav.item_next_id
+        );
         break;
       case "down":
         console.log("down");
+        //todo:down
         break;
       case "left":
         console.log("left");
+        _virtualMenu(
+          nav.item_prev_index,
+          nav.item_prev_id,
+          active.focus.type,
+          nav.item_prev_index,
+          nav.item_prev_id,
+          active.focus.type,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          nav.item_prev_index,
+          nav.item_prev_id
+        );
         break;
     }
   }
@@ -279,16 +314,15 @@ function _prepareNavigation() {
   if (active.focus.type == "content") {
     console.log("Prepare Items for Scrollers");
     nav[`item_current_index`] = active.item.index;
-    nav[`item_current_id`] =
-      active.item.index < content[active.content.index].items.length - 1
-        ? active.item.id
-        : null;
+    nav[`item_current_id`] = active.item.id;
     nav[`item_next_index`] =
       active.item.index < content[active.content.index].items.length - 1
         ? active.item.index + 1
         : null;
     nav[`item_next_id`] =
-      content[active.content.index].items[active.item.index + 1].id;
+      active.item.index < content[active.content.index].items.length - 1
+        ? content[active.content.index].items[active.item.index + 1].id
+        : null;
     nav[`item_prev_index`] =
       active.item.index > 0 ? active.item.index - 1 : null;
     nav[`item_prev_id`] =
@@ -339,12 +373,6 @@ function _virtualMenu(
   if (contentItems != null && contentItems != undefined) {
     defaults.interactive.active.content.items = contentItems;
   }
-  if (itemIndex != null && itemIndex != undefined) {
-    defaults.interactive.active.item.index = itemIndex;
-  }
-  if (itemId != null && itemId != undefined) {
-    defaults.interactive.active.item.id = itemId;
-  }
   if (historyIndex != null && historyIndex != undefined) {
     defaults.interactive.active.history.index = historyIndex;
   }
@@ -362,6 +390,20 @@ function _virtualMenu(
   }
   if (focusType != null && focusType != undefined) {
     defaults.interactive.active.focus.type = focusType;
+  }
+  //ITEMS
+  if (itemIndex != null && itemIndex != undefined) {
+    defaults.interactive.active.item.index = itemIndex;
+
+    defaults.interactive.active.content.items[
+      defaults.interactive.active.content.index
+    ] =
+      defaults.interactive.content[
+        defaults.interactive.active.content.index
+      ].items[itemIndex];
+  }
+  if (itemId != null && itemId != undefined) {
+    defaults.interactive.active.item.id = itemId;
   }
 
   console.log(defaults.interactive.active);
