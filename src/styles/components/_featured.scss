@@ -34,3 +34,8 @@
 .ui__event--animate #ui__featured--front__image {
   transform: scale(1);
 }
+
+#ui__featured .btn.ui__interactive__item--active {
+  background-color: var(--blue-2);
+  color: #fff;
+}

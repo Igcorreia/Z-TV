@@ -39,10 +39,24 @@ window._preloader = function () {
       }
     },
     show: function () {
-      init.ui.update.show("#" + this.id);
+      requestAnimationFrame(function () {
+        $("#" + defaults.ui.preloader).addClass(
+          `${defaults.ui.events}--${defaults.suffix.show}`
+        );
+        $("#" + defaults.ui.preloader).removeClass(
+          `${defaults.ui.events}--${defaults.suffix.hide}`
+        );
+      });
     },
     hide: function () {
-      init.ui.update.hide("#" + this.id);
+      requestAnimationFrame(function () {
+        $("#" + defaults.ui.preloader).addClass(
+          defaults.ui.events + "--" + defaults.suffix.hide
+        );
+        $("#" + defaults.ui.preloader).removeClass(
+          defaults.ui.events + "--" + defaults.suffix.show
+        );
+      });
     },
   };
 

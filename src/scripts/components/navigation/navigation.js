@@ -67,7 +67,6 @@ function _keyNavigation() {
 }
 
 function _navigateInterface(direction) {
-  console.log(defaults.interactive.active);
   var active = defaults.interactive.active;
   var nav = _prepareNavigation();
 
@@ -81,7 +80,6 @@ function _navigateInterface(direction) {
             nav.featured_next_index,
             nav.featured_next_id,
             active.focus.type,
-
             null,
             null,
             nav.featured_next_index,
@@ -109,6 +107,7 @@ function _navigateInterface(direction) {
             active.menu.index,
             active.menu.id
           );
+          init.ui.general.focus.left();
         }
         break;
       case "down":
@@ -151,6 +150,7 @@ function _navigateInterface(direction) {
           active.featured.index,
           active.featured.id
         );
+        init.ui.general.blur.left();
         break;
       case "down":
         _virtualMenu(

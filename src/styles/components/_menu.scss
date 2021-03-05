@@ -1,38 +1,56 @@
+#ui-left__menu {
+  z-index: 100;
+}
+
 #ui-left__menu .col:last-child a {
   margin-bottom: 0px !important;
 }
 
-.ui__menu--menuitem .menu-bar {
+.ui__menu--uimenuitem .ui__menu--bar {
   width: 24px;
   height: 5px;
   background-color: transparent;
   transition: background var(--transition-xs);
 }
 
-.ui__menu--menuitem.ui__event--active .menu-bar {
+.ui__menu--uimenuitem.ui__interactive__item--active .ui__menu--bar {
   background-color: var(--blue-2);
 }
 
 .ui__interactive {
-  // box-shadow: 0 0 0 0 transparent inset !important;
-  // border-color: var(--blue-2);
   position: relative;
 }
 
-.ui__interactive:after {
-  content: "";
-  height: 100%;
-  width: 100%;
-  // box-shadow: 0 0 0 0 transparent inset !important;
-  border: solid 0px var(--blue-2);
-  position: absolute;
-  left: 0;
-  top: 0;
+.ui__menu--name {
+  opacity: 0;
   transition: all var(--transition-xs);
-  border-radius: 5px;
 }
 
-.ui__interactive__item--active:after {
-  // box-shadow: 0 0 0 4px var(--blue-2) inset !important;
-  border: solid 4px var(--blue-2);
+.ui__interactive__left--active .ui__menu--name {
+  opacity: 1;
+  font-weight: 400;
+}
+
+.ui__menu--uimenuitem.ui__interactive__item--active .ui__menu--name {
+  // color: var(--blue-2) !important;
+  font-weight: 700;
+}
+
+#ui__left:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  left: 0;
+  top: 0;
+  background: url("/src/images/mask_left.png") no-repeat left center
+    rgba(255, 255, 255, 0.56);
+  background-size: 600px 100%;
+  position: fixed;
+  z-index: 1;
+  opacity: 0;
+  transition: all var(--transition-xs);
+}
+#ui__left.ui__interactive__left--active:before {
+  opacity: 1;
 }

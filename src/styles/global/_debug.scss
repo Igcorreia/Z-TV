@@ -11,3 +11,23 @@
   background-color: rgba(000, 000, 000, 0.65);
   word-break: break-all;
 }
+
+.ui__interactive:after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  // box-shadow: 0 0 0 0 transparent inset !important;
+  // border: solid 0px var(--blue-2);
+  outline: solid 0px rgba(255, 000, 000, 0);
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: outline var(--transition-xs);
+  border-radius: 5px;
+}
+
+.ui__interactive__item--active:after {
+  // box-shadow: 0 0 0 4px var(--blue-2) inset !important;
+  // border: solid 4px var(--blue-2);
+  // outline: solid 1px rgba(255, 000, 000, 0.9);
+}

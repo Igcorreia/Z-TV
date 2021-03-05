@@ -105,8 +105,14 @@ window._featured = function () {
         `;
       return defaults.sections.featured;
     },
-    animate: function (id) {
-      init.ui.update.animate(id);
+    animate: function (sel) {
+      // init.ui.update.animate(id);
+      requestAnimationFrame(function () {
+        $(sel)
+          .addClass(`${defaults.ui.events}--${defaults.suffix.prepare_animate}`)
+          // .delay(1)
+          .addClass(`${defaults.ui.events}--${defaults.suffix.animate}`);
+      });
     },
   };
 
