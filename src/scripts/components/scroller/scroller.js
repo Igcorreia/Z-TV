@@ -14,10 +14,20 @@ window._scroller = function () {
       }
 
       return (
-        `
-            <div class="row h-50 g-0 justify-content-start align-items-start position-fixed bottom-0 w-100">
+        `<div id="` +
+        init.ui.scrollers.id +
+        `" class="row h-50 g-0 justify-content-start align-items-start position-fixed bottom-0 w-100">
                 <div class="col">
-                  <div class="">` +
+                  <div class="ui__scrollers--selector" style="width:${
+                    defaults.sections.scrollers_settings[
+                      defaults.data.ui.home.sections.main.content[0].type
+                    ].width
+                  }px;height:${
+          defaults.sections.scrollers_settings[
+            defaults.data.ui.home.sections.main.content[0].type
+          ].height
+        }px"></div>
+                  <div class="scroller_vertical--items">` +
         defaults.sections.scrollers +
         `</div>
                 </div>

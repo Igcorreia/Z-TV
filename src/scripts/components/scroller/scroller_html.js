@@ -182,17 +182,19 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
   }
 
   scroller_html = `
-    <div class="row g-0 mb-4">
-      <div class="col">
-        <div class="scroller scroller--${scrollerIndex} ${type}" style="height:${scrollerH}px;">
-          <div class="scroller--items">
-             ${items_html}
+    
+      <div class="row g-0 mb-4">
+        <div class="col">
+          <div class="scroller scroller--${scrollerIndex} ${type}" style="height:${scrollerH}px;">
+            <div class="scroller--items">
+              ${items_html}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
   `;
 
-  html = title_html + scroller_html;
+  html = `<div class="${defaults.ui.scrollers}_horizontal--row">${title_html}${scroller_html}</div>`;
   return html;
 };

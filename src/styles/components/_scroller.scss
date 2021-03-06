@@ -19,3 +19,37 @@
   top: 100%;
   transform: translateX(-50%);
 }
+.ui__scrollers--selector {
+  position: absolute;
+  height: 300px;
+  width: 400px;
+  border: solid 4px transparent;
+  z-index: 9;
+  top: 40px;
+  left: 0;
+  transition: all var(--transition-xs);
+}
+.ui__interactive__bottom--active .ui__scrollers--selector {
+  border-color: var(--blue-2);
+}
+
+//******** SCROLLER ITEMS *********//@at-root
+.scroller--items {
+  transform: translate3d(0px, 0px, 0px);
+  transition: transform 0.3s ease-in-out 0s;
+  position: relative;
+}
+.scroller_vertical--items {
+  transform: translate3d(0px, 0px, 0px);
+  transition: transform 0.3s ease-in-out 0s;
+  position: relative;
+}
+
+.ui__scrollers_horizontal--row {
+  opacity: 1;
+  transition: transform 0.3s ease-in-out 0s;
+}
+
+.ui__scrollers_horizontal--row--hide {
+  opacity: 0;
+}

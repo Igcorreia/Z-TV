@@ -39,6 +39,9 @@ window.defaults = {
         height: 100,
         gutter: 25,
       },
+      title: {
+        height: 64,
+      },
     },
     preloader_status: false,
     preloader_aimation_duration: 1250,

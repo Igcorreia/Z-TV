@@ -1,3 +1,12 @@
 #interface {
   z-index: 3;
 }
+
+#ui__left {
+  z-index: 6;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+#ui__rigth {
+  padding-left: 5px;
+}

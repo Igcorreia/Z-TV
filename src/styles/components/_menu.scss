@@ -64,9 +64,11 @@
   z-index: 6;
   opacity: 0;
   transition: all var(--transition-xs);
+  visibility: hidden;
 }
 #ui__left.ui__interactive__left--active:before {
   opacity: 1;
+  visibility: visible;
 }
 
 #ui-left__menu > .row > .col:nth-child(1) .ui__menu--name {

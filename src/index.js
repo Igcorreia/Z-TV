@@ -18,6 +18,9 @@ import "./scripts/components/scroller/scroller";
 import "./scripts/components/scroller/scroller_html";
 import "./scripts/components/menu/menu";
 import "./scripts/components/navigation/navigation";
+import "./scripts/components/navigation/navigation_context";
+import "./scripts/components/navigation/navigation_virtual_menu";
+import "./scripts/components/navigation/navigation_scrollers";
 
 import "./scripts/script";
 

@@ -22,13 +22,29 @@ window._general = function () {
       $(root).append(this.html);
     },
     focus: {
+      top: function () {
+        $("#ui__rigth").addClass(`${defaults.ui.interactive}__top--active`);
+      },
       left: function () {
         $("#ui__left").addClass(`${defaults.ui.interactive}__left--active`);
       },
+      bottom: function () {
+        $("#ui__scrollers").addClass(
+          `${defaults.ui.interactive}__bottom--active`
+        );
+      },
     },
     blur: {
+      top: function () {
+        $("#ui__rigth").removeClass(`${defaults.ui.interactive}__top--active`);
+      },
       left: function () {
         $("#ui__left").removeClass(`${defaults.ui.interactive}__left--active`);
+      },
+      bottom: function () {
+        $("#ui__scrollers").removeClass(
+          `${defaults.ui.interactive}__bottom--active`
+        );
       },
     },
   };
