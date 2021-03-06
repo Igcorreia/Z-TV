@@ -11,10 +11,10 @@ window._general = function () {
                 <div id="ui__rigth" class="col h-100  position-relative">` +
         init.ui.featured.html() +
         init.ui.scrollers.html() +
+        init.utils.brand.html() +
         `</div>
             </div>
             ` +
-        init.utils.brand.html() +
         init.utils.debug.html()
       );
     },

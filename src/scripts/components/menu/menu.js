@@ -10,7 +10,8 @@ window._menu = function () {
 
         const newLocal = `<div class="col">
             <a id="${defaults.ui.menu}--${defaults.data.menu[i].name}" class="${defaults.ui.menu}--uimenuitem btn btn-link mb-32 ${defaults.ui.interactive} ${defaults.ui.interactive}--${i}" data-interactive-type="menu" data-interactive-item-index="${i}" href="${defaults.data.menu[i].path}">
-              ${defaults.data.menu[i].svg}
+              <span class="${defaults.ui.menu}--svg ${defaults.ui.menu}--svg-default">${defaults.data.menu[i].svg}</span>
+              <span class="${defaults.ui.menu}--svg ${defaults.ui.menu}--svg-hover">${defaults.data.menu[i].svg_hover}</span>
               <span class="${defaults.ui.menu}--name text-capitalize fs-lg text-block-1 ms-4 m-0 p-0 mb-3 text-sd-md text-black-1 position-absolute">${defaults.data.menu[i].name}</span>
               <div class="${defaults.ui.menu}--bar menu-bar ms-auto me-auto"></div>
             </a>

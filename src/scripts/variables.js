@@ -1,5 +1,5 @@
 window.defaults = {
-  mode: "local",
+  mode: "prod",
   root: "#root",
   os: null,
   data: null,
@@ -40,7 +40,7 @@ window.defaults = {
         gutter: 25,
       },
     },
-    preloader_status: true,
+    preloader_status: false,
     preloader_aimation_duration: 1250,
   },
   ui: {
