@@ -66,6 +66,19 @@
   transition: all var(--transition-xs);
   visibility: hidden;
 }
+
+#ui__left:after {
+  content: "";
+  position: absolute;
+  background: url("/src/images/mask_left.png") no-repeat left center
+    rgba(255, 255, 255, 0.5);
+  background-size: 100% 100%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 184px;
+}
+
 #ui__left.ui__interactive__left--active:before {
   opacity: 1;
   visibility: visible;

@@ -17,19 +17,22 @@ window._navigation_scroller = function () {
   for (let i = 0; i < row; i++) {
     verticalH += scoller_settings[content[i].type].height;
     verticalH += verticalG;
-
-    $(".ui__scrollers_horizontal--row")
-      .eq(i)
-      .addClass("ui__scrollers_horizontal--row--hide");
   }
 
-  for (let a = content.length; a >= row; a--) {
-    $(".ui__scrollers_horizontal--row")
-      .eq(i)
-      .removeClass("ui__scrollers_horizontal--row--hide");
+  for (let a = 0; a < content.length; a++) {
+    // const content = content[i];
+    if (a < row) {
+      $(".ui__scrollers_horizontal--row")
+        .eq(a)
+        .addClass("ui__scrollers_horizontal--row--hide");
+    } else {
+      $(".ui__scrollers_horizontal--row")
+        .eq(a)
+        .removeClass("ui__scrollers_horizontal--row--hide");
+    }
   }
 
-  console.log(row + " - " + col + " - " + verticalH);
+  //   console.log(row + " - " + col + " - " + verticalH);
 
   $(".ui__scrollers--selector").attr(
     "style",
