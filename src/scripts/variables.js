@@ -43,7 +43,7 @@ window.defaults = {
         height: 64,
       },
     },
-    preloader_status: false,
+    preloader_status: true,
     preloader_aimation_duration: 1250,
     delay_duration: 3000,
     settings: false,

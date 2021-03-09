@@ -13,7 +13,7 @@ window._settings = function () {
                             What if Zillow was Netflix is a side project made for fun. <br>This redesign concept has been created to practice my skills with no client restrictions.<br> The main goal was to design an interface and experience that 
 I would create if given the opportunity.
                         </p>
-                        <p class="mt-5 ff-os-b">Use you Keyboard to Navigate: <kbd><i class="fa fa-arrows"></i></kbd></p><p>Press any key to close instructions.</p>
+                        <p class="mt-5 ff-os-b">Use your Keyboard to Navigate: <kbd><i class="fa fa-arrows"></i></kbd></p><p>Press any key to close instructions.</p>
 
                         <div class="mt-5">
                             <div class="ff-os-b fs-xs">Behance Design Project</div>
