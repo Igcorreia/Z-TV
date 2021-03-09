@@ -13,6 +13,7 @@ import "./scripts/components/debug/debug";
 import "./scripts/components/brand/brand";
 import "./scripts/components/general/general";
 import "./scripts/components/preloader/preloader";
+import "./scripts/components/settings/settings";
 import "./scripts/components/featured/featured";
 import "./scripts/components/scroller/scroller";
 import "./scripts/components/scroller/scroller_html";

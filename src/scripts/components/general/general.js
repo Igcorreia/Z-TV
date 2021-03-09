@@ -2,6 +2,7 @@ window._general = function () {
   var func = {
     html: function () {
       return (
+        init.utils.settings.html() +
         init.ui.preloader.html() +
         `
             <div id="ui" class="row h-100 w-100 g-0 no-gutters align-items-center justify-content-center position-fixed top-0 start-0" g-0>

@@ -12,6 +12,7 @@ window.init = {
   utils: {
     debug: _debug(),
     brand: _brand(),
+    settings: _settings(),
   },
   ui: {
     general: _general(),
@@ -42,17 +43,19 @@ window.init = {
           init.ui.general.inject();
         })
         .then(function (json) {
-          $(root)
-            .imagesLoaded({ background: ".ui__img" })
-            .always(function (instance) {})
-            .done(function (instance) {
-              init.interactivity();
-              setTimeout(function () {
-                defaults.introsound.play();
-                init.ui.preloader.hide();
-                init.ui.featured.animate(`#${defaults.ui.featured}`);
-              }, defaults.sections.preloader_aimation_duration);
-            });
+          setTimeout(function () {
+            $(root)
+              .imagesLoaded({ background: ".ui__img" })
+              .always(function (instance) {})
+              .done(function (instance) {
+                init.interactivity();
+                setTimeout(function () {
+                  defaults.introsound.play();
+                  init.ui.preloader.hide();
+                  init.ui.featured.animate(`#${defaults.ui.featured}`);
+                }, defaults.sections.preloader_aimation_duration);
+              });
+          }, defaults.sections.delay_duration);
         })
         .catch(function (error) {
           console.log(error);

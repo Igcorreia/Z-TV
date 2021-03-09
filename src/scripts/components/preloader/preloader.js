@@ -21,6 +21,7 @@ window._preloader = function () {
               <p>
                 Welcome to a <i class="ff-os-ebi text-blue-2">new</i> immersive digital experience...
               </p>
+              <p class="mt-5">Use you Keyboard to Navigate: <kbd><i class="fa fa-arrows"></i></kbd></p>
             </div>
             </div>
           </div>`

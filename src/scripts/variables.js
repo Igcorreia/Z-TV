@@ -43,8 +43,10 @@ window.defaults = {
         height: 64,
       },
     },
-    preloader_status: true,
+    preloader_status: false,
     preloader_aimation_duration: 1250,
+    delay_duration: 3000,
+    settings: false,
   },
   ui: {
     debug: "ui__debug",
@@ -56,6 +58,7 @@ window.defaults = {
     featured: "ui__featured",
     scrollers: "ui__scrollers",
     interactive: "ui__interactive",
+    settings: "ui__settings",
   },
   interactive: {
     active: {},

@@ -1,0 +1,22 @@
+#ui__settings {
+  opacity: 0;
+  z-index: 9;
+}
+#ui__settings.bg-translucid {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+#ui__settings .ui_content {
+  box-shadow: var(--shadow);
+  border-top: solid 8px var(--blue-2);
+}
+
+#ui__settings.ui__event--show {
+  opacity: 1;
+  transition: opacity var(--transition-xl);
+}
+
+#ui__settings.ui__event--hide {
+  opacity: 0;
+  transition: opacity var(--transition-xl);
+}

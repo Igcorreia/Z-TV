@@ -53,16 +53,37 @@ function _keyNavigation() {
 
     switch (newLocal) {
       case 38:
+      case 50:
+      case 87:
+      case 104:
         _navigateInterface("up");
         break;
       case 39:
+      case 54:
+      case 68:
+      case 102:
         _navigateInterface("right");
         break;
       case 40:
+      case 56:
+      case 83:
+      case 98:
         _navigateInterface("down");
         break;
       case 37:
+      case 52:
+      case 65:
+      case 100:
         _navigateInterface("left");
+        break;
+      default:
+        if (defaults.sections.settings == false) {
+          init.utils.settings.show();
+          defaults.sections.settings = true;
+        } else {
+          init.utils.settings.hide();
+          defaults.sections.settings = false;
+        }
         break;
     }
   });
