@@ -3,7 +3,7 @@ window.defaults = {
   root: "#root",
   os: null,
   data: null,
-  data_url: "https://next.json-generator.com/api/json/get/V13KQEB-c",
+  data_url: "https://next.json-generator.com/api/json/get/4JtBBOy75",
   introsound: new Audio("/src/audio/bell.wav"),
   debug: {
     active: false,
@@ -30,7 +30,7 @@ window.defaults = {
         gutter: 25,
       },
       portrait: {
-        height: 450,
+        height: 350,
         width: 240,
         gutter: 25,
       },
