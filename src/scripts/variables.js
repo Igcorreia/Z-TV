@@ -4,7 +4,7 @@ window.defaults = {
   os: null,
   data: null,
   data_url: "https://next.json-generator.com/api/json/get/4JtBBOy75",
-  introsound: new Audio("/src/audio/bell.wav"),
+  introsound: new Audio("/bell.wav"),
   debug: {
     active: false,
     auto_refresh: false,
