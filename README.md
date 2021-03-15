@@ -10,6 +10,7 @@ This is purely an exercise to try to develop any interface like Netflix.
 
 - [UI Design in Behance](https://www.behance.net/gallery/113430881/What-if-Zillow-was-Netflix)
 - [As Zillow Live Demo](https://zillow-demo.igcorreia.com/)
+- [Interactive Protopie](https://cloud.protopie.io/p/0b943b0f92/2?ui=false&mockup=false&touchHint=true&scaleToFit=true&cursorType=touch)
 
 ## 🖥️ Target OS
 
