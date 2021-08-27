@@ -5,7 +5,7 @@
 This is [probably] purely an exercise to try to develop any interface like Netflix.
 Since I am building v2.0 things may change.
 
-![Dynamic](/src/images/git_cover.png)
+![Dynamic](/images/git_cover.png)
 
 ## 🪄 Design / UI / Demo
 
