@@ -37,6 +37,9 @@ window.init = {
       success: function (json) {
         resolve(json);
       },
+      error: function (jqXHR, textStatus, errorThrown) {
+        reject(new Error('Data fetch failed: ' + textStatus));
+      },
     });
   }),
   startup: function () {
@@ -58,7 +61,7 @@ window.init = {
                 setTimeout(function () {
                   introsound.play();
                   init.ui.preloader.hide();
-                }, defaults.sections.preloader_aimation_duration);
+                }, defaults.sections.preloader_animation_duration);
               });
           }, defaults.sections.delay_duration);
         })

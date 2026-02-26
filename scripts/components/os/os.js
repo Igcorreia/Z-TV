@@ -22,7 +22,6 @@ window._os = function () {
     konq: 0,
     opera: 0,
     chrome: 0,
-    safari: 0,
 
     //specific version
     ver: null,

@@ -9,7 +9,7 @@ window._debug = function () {
     id: defaults.ui.debug,
     html: function () {
       if (defaults.debug.active === true) {
-        return `<div id="${init.utils.debug.id}" class="position-fixed text-white"></div>
+        return `<div id="${init.utils.debug.id}" class="position-fixed text-white">
             <div id="${init.utils.debug.id}__horazion" class="position-fixed"></div>
         </div>
         `;
@@ -62,7 +62,7 @@ function _osKeyPress() {
   document.addEventListener("keydown", function (event) {
     const newLocal = event.which;
     $("#" + defaults.ui.debug).prepend(
-      `<div> Key Pressed Codd: ${newLocal}</div>`
+      `<div> Key Pressed Code: ${newLocal}</div>`
     );
   });
 }
