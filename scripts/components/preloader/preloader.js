@@ -17,7 +17,7 @@ window._preloader = function () {
         );
       } else {
         return (
-          `<div id="${init.ui.preloader.id}" class="d-none ${defaults.ui.events}--defaults.suffix.hide"></div>`
+          `<div id="${init.ui.preloader.id}" class="d-none ${defaults.ui.events}--${defaults.suffix.hide}"></div>`
         );
       }
     },

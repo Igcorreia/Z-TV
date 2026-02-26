@@ -46,7 +46,7 @@ window.defaults = {
       }
     },
     preloader_status: true,
-    preloader_aimation_duration: 1250,
+    preloader_animation_duration: 1250,
     delay_duration: 3000,
     settings: false
   },

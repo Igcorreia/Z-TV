@@ -76,7 +76,7 @@ window._featured = function () {
                   <div class="${init.ui.featured.id}--front__section h-100 position-relative">
                   <div class="${init.ui.featured.id}--content row position-absolute h-60 w-100 justify-content-start align-items-center g-0">
                       <div class="col-auto">
-                        <div class="${init.ui.featured.id}--front__content" class="position-relative">
+                        <div class="${init.ui.featured.id}--front__content position-relative">
                           <div class="row flex-column g-0">
                             <div class="col">
                               <div class="${init.ui.featured.id}--content-icon row justify-content-center align-items-center g-0 mb-3">
@@ -97,7 +97,7 @@ window._featured = function () {
                     <div class="${init.ui.featured.id}--front__mask--left"></div>
                     <div class="${init.ui.featured.id}--front__mask--bottom"></div>
                   </div> 
-                  <div class="${init.ui.featured.id}--front__image" class="position-absolute ui__img img-bg-fit w-100 h-100" style="background-image:url('${content.image}')">
+                  <div class="${init.ui.featured.id}--front__image position-absolute ui__img img-bg-fit w-100 h-100" style="background-image:url('${content.image}')">
                     </div>          
                    
                   </div>

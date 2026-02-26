@@ -9,7 +9,7 @@ window._general = function () {
                 <div id="ui__left" class="col-auto h-100 position-relative">` +
         init.ui.menu.html() +
         `</div>
-                <div id="ui__rigth" class="col h-100  position-relative">` +
+                <div id="ui__right" class="col h-100  position-relative">` +
         init.ui.featured.html() +
         init.ui.scrollers.html() +
         init.utils.brand.html() +
@@ -20,12 +20,12 @@ window._general = function () {
       );
     },
     inject: function () {
-      $(root).append(this.html);
+      $(root).append(this.html());
       init.ui.featured.create();
     },
     focus: {
       top: function () {
-        $("#ui__rigth").addClass(`${defaults.ui.interactive}__top--active`);
+        $("#ui__right").addClass(`${defaults.ui.interactive}__top--active`);
       },
       left: function () {
         $("#ui__left").addClass(`${defaults.ui.interactive}__left--active`);
@@ -38,7 +38,7 @@ window._general = function () {
     },
     blur: {
       top: function () {
-        $("#ui__rigth").removeClass(`${defaults.ui.interactive}__top--active`);
+        $("#ui__right").removeClass(`${defaults.ui.interactive}__top--active`);
       },
       left: function () {
         $("#ui__left").removeClass(`${defaults.ui.interactive}__left--active`);

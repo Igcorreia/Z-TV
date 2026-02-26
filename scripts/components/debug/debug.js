@@ -62,7 +62,7 @@ function _osKeyPress() {
   document.addEventListener("keydown", function (event) {
     const newLocal = event.which;
     $("#" + defaults.ui.debug).prepend(
-      `<div> Key Pressed Codd: ${newLocal}</div>`
+      `<div> Key Pressed Code: ${newLocal}</div>`
     );
   });
 }
