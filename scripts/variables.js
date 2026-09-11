@@ -1,4 +1,4 @@
-window.defaults = {
+export const defaults = {
   mode: 'local',
   root: '#root',
   os: null,
@@ -20,10 +20,7 @@ window.defaults = {
     animate: 'animate'
   },
   sections: {
-    menu: '',
     menu_default: 'home',
-    featured: '',
-    scrollers: '',
     scrollers_settings: {
       landscape: {
         height: 300,
@@ -71,18 +68,18 @@ window.defaults = {
   signature: `
 /***********************************************************
  ***********************************************************
- ** 
- **  👋 Hi there, I am Ignacio, welcome.                     
- ** 
+ **
+ **  👋 Hi there, I am Ignacio, welcome.
+ **
  **  Thanks for visiting, please leave a like or follow me.
- ** 
+ **
  **  You may find me @igcorreia on 🐦, 😏📘, 👾
- ** 
+ **
  **  --> If you are hiring, I am looking for a fulltime job
  **  --> I am from Europe (Portugal)
  **  --> UI, UX, PRODUCT DESIGN
  **  --> ignacio . r . correia (at) gmail . com
- ** 
+ **
  ***********************************************************
  ************************************************************/
 `

@@ -1,4 +1,6 @@
-window._navigation_scroller = function () {
+import { defaults } from "../../variables.js";
+
+export function navigationScroller() {
   let content = defaults.data.ui.home.sections.main.content;
   let scoller_settings = defaults.sections.scrollers_settings;
 
@@ -44,4 +46,4 @@ window._navigation_scroller = function () {
   $(".scroller--items")
     .eq(row)
     .attr("style", `transform: translate3d(${scrollerSize}px, 0px, 0px);`);
-};
+}

@@ -1,4 +1,6 @@
-window._uiScroller = function (type, category, index, scrollerIndex) {
+import { defaults } from "../../variables.js";
+
+export function uiScroller(type, category, index, scrollerIndex) {
   const scroller = defaults.data.content[category][index];
   const content = scroller.content;
   const format = scroller.format;
@@ -201,4 +203,4 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
 
   html = `<div class="${defaults.ui.scrollers}_horizontal--row">${title_html}${scroller_html}</div>`;
   return html;
-};
+}

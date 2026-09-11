@@ -1,10 +1,16 @@
-window._navigation = function () {
-  if (defaults.interactive.active.id == null) {
-    _chooseDefaultContent();
-  }
-};
+import { defaults } from "../../variables.js";
+import { general } from "../general/general.js";
+import { settings } from "../settings/settings.js";
+import { prepareNavigation } from "./navigation_context.js";
+import { virtualMenu } from "./navigation_virtual_menu.js";
 
-function _chooseDefaultContent() {
+export function startNavigation() {
+  if (defaults.interactive.active.id == null) {
+    chooseDefaultContent();
+  }
+}
+
+function chooseDefaultContent() {
   var items = [];
   var item = {};
 
@@ -39,46 +45,46 @@ function _chooseDefaultContent() {
     },
   };
 
-  init.ui.general.focus.top();
+  general.focus.top();
 
-  _keyNavigation();
-  _virtualMenu();
+  keyNavigation();
+  virtualMenu();
 }
 
-function _keyNavigation() {
+function keyNavigation() {
   document.addEventListener("keydown", function (event) {
     switch (event.which) {
       case 38:
       case 50:
       case 87:
       case 104:
-        _navigateInterface("up");
+        navigateInterface("up");
         break;
       case 39:
       case 54:
       case 68:
       case 102:
-        _navigateInterface("right");
+        navigateInterface("right");
         break;
       case 40:
       case 56:
       case 83:
       case 98:
-        _navigateInterface("down");
+        navigateInterface("down");
         break;
       case 37:
       case 52:
       case 65:
       case 100:
-        _navigateInterface("left");
+        navigateInterface("left");
         break;
       case 112:
       case 113:
         if (defaults.sections.settings == false) {
-          init.utils.settings.show();
+          settings.show();
           defaults.sections.settings = true;
         } else {
-          init.utils.settings.hide();
+          settings.hide();
           defaults.sections.settings = false;
         }
         break;
@@ -86,24 +92,24 @@ function _keyNavigation() {
   });
 }
 
-function _navigateInterface(direction) {
+function navigateInterface(direction) {
   var active = defaults.interactive.active;
-  var nav = _prepareNavigation();
+  var nav = prepareNavigation();
 
   if (active.focus.type == "featured") {
-    _navigateFromFeatured(direction, active, nav);
+    navigateFromFeatured(direction, active, nav);
   } else if (active.focus.type == "menu") {
-    _navigateFromMenu(direction, active, nav);
+    navigateFromMenu(direction, active, nav);
   } else if (active.focus.type == "content") {
-    _navigateFromContent(direction, active, nav);
+    navigateFromContent(direction, active, nav);
   }
 }
 
-function _navigateFromFeatured(direction, active, nav) {
+function navigateFromFeatured(direction, active, nav) {
   switch (direction) {
     case "right":
       if (nav.featured_next_id != null) {
-        _virtualMenu({
+        virtualMenu({
           focus: { index: nav.featured_next_index, id: nav.featured_next_id, type: "featured" },
           featured: { index: nav.featured_next_index, id: nav.featured_next_id },
         });
@@ -111,49 +117,49 @@ function _navigateFromFeatured(direction, active, nav) {
       break;
     case "left":
       if (nav.featured_prev_id != null) {
-        _virtualMenu({
+        virtualMenu({
           focus: { index: nav.featured_prev_index, id: nav.featured_prev_id, type: "featured" },
           featured: { index: nav.featured_prev_index, id: nav.featured_prev_id },
         });
       } else {
-        _virtualMenu({
+        virtualMenu({
           focus: { index: active.menu.index, id: active.menu.id, type: "menu" },
           menu: { index: active.menu.index, id: active.menu.id },
         });
-        init.ui.general.blur.top();
-        init.ui.general.focus.left();
+        general.blur.top();
+        general.focus.left();
       }
       break;
     case "down":
-      _virtualMenu({
+      virtualMenu({
         focus: { index: active.item.index, id: active.item.id, type: "content" },
         content: { index: active.content.index, id: active.content.id },
         item: { index: active.item.index, id: active.item.id },
       });
-      init.ui.general.focus.bottom();
-      init.ui.general.blur.top();
+      general.focus.bottom();
+      general.blur.top();
       break;
   }
 }
 
-function _navigateFromMenu(direction, active, nav) {
+function navigateFromMenu(direction, active, nav) {
   switch (direction) {
     case "up":
-      _virtualMenu({
+      virtualMenu({
         focus: { index: nav.menu_prev_index, id: nav.menu_prev_id, type: "menu" },
         menu: { index: nav.menu_prev_index, id: nav.menu_prev_id },
       });
       break;
     case "right":
-      _virtualMenu({
+      virtualMenu({
         focus: { index: active.featured.index, id: active.featured.id, type: "featured" },
         featured: { index: active.featured.index, id: active.featured.id },
       });
-      init.ui.general.blur.left();
-      init.ui.general.focus.top();
+      general.blur.left();
+      general.focus.top();
       break;
     case "down":
-      _virtualMenu({
+      virtualMenu({
         focus: { index: nav.menu_next_index, id: nav.menu_next_id, type: "menu" },
         menu: { index: nav.menu_next_index, id: nav.menu_next_id },
       });
@@ -161,41 +167,41 @@ function _navigateFromMenu(direction, active, nav) {
   }
 }
 
-function _navigateFromContent(direction, active, nav) {
+function navigateFromContent(direction, active, nav) {
   switch (direction) {
     case "up":
       if (nav.content_prev_item_id != null) {
-        _virtualMenu({
+        virtualMenu({
           focus: { index: nav.content_prev_item_index, id: nav.content_prev_item_id, type: "content" },
           content: { index: nav.content_prev_index, id: nav.content_prev_id },
           item: { index: nav.content_prev_item_index, id: nav.content_prev_item_id },
         });
       } else {
-        _virtualMenu({
+        virtualMenu({
           focus: { index: active.featured.index, id: active.featured.id, type: "featured" },
           featured: { index: active.featured.index, id: active.featured.id },
           content: { index: active.content.index, id: active.content.id },
           item: { index: active.item.index, id: active.item.id },
         });
-        init.ui.general.blur.bottom();
-        init.ui.general.focus.top();
+        general.blur.bottom();
+        general.focus.top();
       }
       break;
     case "right":
-      _virtualMenu({
+      virtualMenu({
         focus: { index: nav.item_next_index, id: nav.item_next_id, type: "content" },
         item: { index: nav.item_next_index, id: nav.item_next_id },
       });
       break;
     case "down":
-      _virtualMenu({
+      virtualMenu({
         focus: { index: nav.content_next_item_index, id: nav.content_next_item_id, type: "content" },
         content: { index: nav.content_next_index, id: nav.content_next_id },
         item: { index: nav.content_next_item_index, id: nav.content_next_item_id },
       });
       break;
     case "left":
-      _virtualMenu({
+      virtualMenu({
         focus: { index: nav.item_prev_index, id: nav.item_prev_id, type: "content" },
         item: { index: nav.item_prev_index, id: nav.item_prev_id },
       });

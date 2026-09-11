@@ -1,34 +1,35 @@
-window._debug = function () {
-  if (defaults.debug.key_press === true) {
-    _osKeyPress();
-    _osDetails();
-    _osAutoRefresh();
-  }
+import { defaults } from "../../variables.js";
+import { detectOS } from "../os/os.js";
 
-  var func = {
-    id: defaults.ui.debug,
-    html: function () {
-      if (defaults.debug.active === true) {
-        return `<div id="${init.utils.debug.id}" class="position-fixed text-white"></div>
-            <div id="${init.utils.debug.id}__horazion" class="position-fixed"></div>
-        </div>
-        `;
-      } else {
-        return "";
-      }
-    },
-    prepend: function (data) {
-      $(`#${defaults.ui.debug}`).prepend(data);
-    },
-  };
-  return func;
+export const debug = {
+  id: defaults.ui.debug,
+  setup: function () {
+    if (defaults.debug.key_press === true) {
+      osKeyPress();
+      osDetails();
+      osAutoRefresh();
+    }
+  },
+  html: function () {
+    if (defaults.debug.active === true) {
+      return `<div id="${debug.id}" class="position-fixed text-white"></div>
+          <div id="${debug.id}__horazion" class="position-fixed"></div>
+      </div>
+      `;
+    } else {
+      return "";
+    }
+  },
+  prepend: function (data) {
+    $(`#${debug.id}`).prepend(data);
+  },
 };
 
-function _osDetails() {
+function osDetails() {
   if (defaults.debug.os_details === true) {
-    defaults.os = window._os();
+    defaults.os = detectOS();
 
-    $(`#${defaults.ui.debug}`).append(
+    $(`#${debug.id}`).append(
       JSON.stringify(
         {
           browser: defaults.os.browser,
@@ -42,9 +43,9 @@ function _osDetails() {
   }
 }
 
-function _osAutoRefresh() {
+function osAutoRefresh() {
   if (defaults.debug.auto_refresh === true) {
-    if (defaults.os.system.x11 == true) {
+    if (defaults.os && defaults.os.system.x11 == true) {
       setInterval(function () {
         window.location = window.location;
       }, 5000);
@@ -52,11 +53,8 @@ function _osAutoRefresh() {
   }
 }
 
-function _osKeyPress() {
+function osKeyPress() {
   document.addEventListener("keydown", function (event) {
-    const newLocal = event.which;
-    $("#" + defaults.ui.debug).prepend(
-      `<div> Key Pressed Code: ${newLocal}</div>`
-    );
+    debug.prepend(`<div> Key Pressed Code: ${event.which}</div>`);
   });
 }

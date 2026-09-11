@@ -1,31 +1,35 @@
-window._virtualMenu = function (options) {
+import { defaults } from "../../variables.js";
+import { featured } from "../featured/featured.js";
+import { navigationScroller } from "./navigation_scrollers.js";
+
+export function virtualMenu(options) {
   options = options || {};
   var active = defaults.interactive.active;
 
-  _assignIfSet(active.menu, options.menu, ["index", "id"]);
-  _assignIfSet(active.featured, options.featured, ["index", "id"]);
-  _assignIfSet(active.content, options.content, ["index", "id", "items"]);
-  _assignIfSet(active.focus, options.focus, ["index", "id", "type"]);
+  assignIfSet(active.menu, options.menu, ["index", "id"]);
+  assignIfSet(active.featured, options.featured, ["index", "id"]);
+  assignIfSet(active.content, options.content, ["index", "id", "items"]);
+  assignIfSet(active.focus, options.focus, ["index", "id", "type"]);
 
   var item = options.item || {};
   if (item.index != null) {
     active.item.index = item.index;
     active.content.items[active.content.index] =
       defaults.interactive.content[active.content.index].items[item.index];
-    _navigation_scroller();
+    navigationScroller();
   }
   if (item.id != null) {
     active.item.id = item.id;
   }
 
-  _focusUI();
+  focusUI();
 
   if (options.focus && options.focus.type == "content") {
-    _focusFEATUREDUI();
+    focusFeaturedUI();
   }
-};
+}
 
-function _assignIfSet(target, source, keys) {
+function assignIfSet(target, source, keys) {
   if (!source) return;
   for (var i = 0; i < keys.length; i++) {
     var key = keys[i];
@@ -35,7 +39,7 @@ function _assignIfSet(target, source, keys) {
   }
 }
 
-function _focusUI() {
+function focusUI() {
   $(`.${defaults.ui.interactive}__item--active`).removeClass(
     `${defaults.ui.interactive}__item--active`
   );
@@ -44,11 +48,11 @@ function _focusUI() {
   );
 }
 
-function _focusFEATUREDUI() {
+function focusFeaturedUI() {
   let activeContent = defaults.interactive.active.content;
   let activeSection = activeContent.items[activeContent.index];
 
-  init.ui.featured.changeContent(
+  featured.changeContent(
     activeContent.index,
     activeContent.id,
     activeSection.index,

@@ -1,4 +1,6 @@
-window._prepareNavigation = function () {
+import { defaults } from "../../variables.js";
+
+export function prepareNavigation() {
   var nav = {};
   var active = defaults.interactive.active;
   var types = ["menu", "featured", "content"];
@@ -91,4 +93,4 @@ window._prepareNavigation = function () {
         : null;
   }
   return nav;
-};
+}
