@@ -20,7 +20,6 @@ window._navigation_scroller = function () {
   }
 
   for (let a = 0; a < content.length; a++) {
-    // const content = content[i];
     if (a < row) {
       $(".ui__scrollers_horizontal--row")
         .eq(a)
@@ -31,8 +30,6 @@ window._navigation_scroller = function () {
         .removeClass("ui__scrollers_horizontal--row--hide");
     }
   }
-
-  //   console.log(row + " - " + col + " - " + verticalH);
 
   $(".ui__scrollers--selector").attr(
     "style",

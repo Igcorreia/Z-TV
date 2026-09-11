@@ -20,12 +20,6 @@ window._debug = function () {
     prepend: function (data) {
       $(`#${defaults.ui.debug}`).prepend(data);
     },
-    show: function () {
-      init.ui.update.show(this.id);
-    },
-    hide: function () {
-      init.ui.update.hide(this.id);
-    },
   };
   return func;
 };

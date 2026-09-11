@@ -8,7 +8,6 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
     id: `${defaults.ui.scrollers}--${scrollerIndex}`,
     format: format,
     category: category,
-    // active: false,
     type: "content",
     size: defaults.sections.scrollers_settings[format],
     items: [],
@@ -47,8 +46,6 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
     for (let i = 0; i < content.length; i++) {
       defaults.interactive.content[scrollerIndex].items.push({
         id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
-        // type: "item",
-        // active: false,
         type: "content",
         subtype: "landscape",
         index: i,
@@ -114,8 +111,6 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
     for (let i = 0; i < content.length; i++) {
       defaults.interactive.content[scrollerIndex].items.push({
         id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
-        // type: "item",
-        // active: false,
         type: "content",
         subtype: "button",
         index: i,
@@ -140,8 +135,6 @@ window._uiScroller = function (type, category, index, scrollerIndex) {
     for (let i = 0; i < content.length; i++) {
       defaults.interactive.content[scrollerIndex].items.push({
         id: `${defaults.ui.scrollers}--${scrollerIndex}__item--${i}`,
-        // type: "item",
-        // active: false,
         type: "content",
         subtype: "portrait",
         index: i,
