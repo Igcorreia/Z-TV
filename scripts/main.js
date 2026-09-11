@@ -1,78 +1,77 @@
-let data_url = '';
-let introsound = new Audio('/audio/'+defaults.introsound);
+import { defaults } from "./variables.js";
+import { general } from "./components/general/general.js";
+import { preloader } from "./components/preloader/preloader.js";
+import { debug } from "./components/debug/debug.js";
+import { startNavigation } from "./components/navigation/navigation.js";
+
+const dataUrl = defaults.mode == "local" ? defaults.local_bd : defaults.data_url;
+const introsound = new Audio("/audio/" + defaults.introsound);
 
 if (defaults.signature_status === true) {
   console.log(defaults.signature);
 }
 
-if (defaults.mode == "local") {
-  data_url = defaults.local_bd;
-} else {
-  data_url = defaults.data_url;
+function loadConfig() {
+  if (defaults.mode == "local") {
+    return Promise.resolve({});
+  }
+  return import("./config.local.js")
+    .then(function (module) {
+      return module.config || {};
+    })
+    .catch(function () {
+      return {};
+    });
 }
 
-window.init = {
-  utils: {
-    debug: _debug(),
-    brand: _brand(),
-    settings: _settings(),
-  },
-  ui: {
-    general: _general(),
-    preloader: _preloader(),
-    featured: _featured(),
-    scrollers: _scroller(),
-    menu: _menu(),
-  },
-  interactivity: function () {
-    _navigation();
-  },
-  fetchdata: new Promise(function (resolve, reject) {
+function fetchData(config) {
+  return new Promise(function (resolve, reject) {
+    var headers = {};
+    if (defaults.mode != "local" && config.apikey) {
+      headers["Authorization"] = "Bearer " + config.apikey;
+    }
     $.ajax({
-      url: data_url,
-      headers: {
-        'Authorization':'Bearer ' + defaults.apikey,
-      },
+      url: dataUrl,
+      headers: headers,
       cache: false,
       success: function (json) {
         resolve(json);
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        reject(new Error('Data fetch failed: ' + textStatus));
+        reject(new Error("Data fetch failed: " + textStatus));
       },
     });
-  }),
-  startup: function () {
-    try {
-      init.fetchdata
-        .then(function (json) {
-          defaults.data = json;
-        })
-        .then(function () {
-          init.ui.general.inject();
-        })
-        .then(function () {
-          setTimeout(function () {
-            $(root)
-              .imagesLoaded({ background: ".ui__img" })
-              .always(function () {})
-              .done(function () {
-                init.interactivity();
-                setTimeout(function () {
-                  introsound.play();
-                  init.ui.preloader.hide();
-                }, defaults.sections.preloader_animation_duration);
-              });
-          }, defaults.sections.delay_duration);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } catch (error) {
+  });
+}
+
+function startup() {
+  loadConfig()
+    .then(fetchData)
+    .then(function (json) {
+      defaults.data = json;
+      general.inject();
+      debug.setup();
+    })
+    .then(function () {
+      setTimeout(function () {
+        // .always, not .done: a single broken thumbnail must not leave the app stuck on the preloader
+        $(defaults.root)
+          .imagesLoaded({ background: ".ui__img" })
+          .always(function () {
+            startNavigation();
+            setTimeout(function () {
+              var playing = introsound.play();
+              if (playing && playing.catch) {
+                playing.catch(function () {});
+              }
+              preloader.hide();
+            }, defaults.sections.preloader_animation_duration);
+          });
+      }, defaults.sections.delay_duration);
+    })
+    .catch(function (error) {
       console.log(error);
-    }
-  },
-};
-window.addEventListener("DOMContentLoaded", function () {
-  init.startup();
-});
+    });
+}
+
+window.addEventListener("DOMContentLoaded", startup);

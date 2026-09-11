@@ -1,4 +1,6 @@
-window._navigation_scroller = function () {
+import { defaults } from "../../variables.js";
+
+export function navigationScroller() {
   let content = defaults.data.ui.home.sections.main.content;
   let scoller_settings = defaults.sections.scrollers_settings;
 
@@ -20,7 +22,6 @@ window._navigation_scroller = function () {
   }
 
   for (let a = 0; a < content.length; a++) {
-    // const content = content[i];
     if (a < row) {
       $(".ui__scrollers_horizontal--row")
         .eq(a)
@@ -31,8 +32,6 @@ window._navigation_scroller = function () {
         .removeClass("ui__scrollers_horizontal--row--hide");
     }
   }
-
-  //   console.log(row + " - " + col + " - " + verticalH);
 
   $(".ui__scrollers--selector").attr(
     "style",
@@ -47,4 +46,4 @@ window._navigation_scroller = function () {
   $(".scroller--items")
     .eq(row)
     .attr("style", `transform: translate3d(${scrollerSize}px, 0px, 0px);`);
-};
+}

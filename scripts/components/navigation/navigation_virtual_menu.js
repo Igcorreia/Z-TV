@@ -1,93 +1,63 @@
-window._virtualMenu = function (
-  focusIndex,
-  focusId,
-  focusType,
-  menuIndex,
-  menuId,
-  featuredIndex,
-  featuredId,
-  contentIndex,
-  contentId,
-  contentItems,
-  itemIndex,
-  itemId,
-  focusSubtype
-) {
-  if (menuIndex != null && menuIndex != undefined) {
-    defaults.interactive.active.menu.index = menuIndex;
-  }
-  if (menuId != null && menuId != undefined) {
-    defaults.interactive.active.menu.id = menuId;
-  }
-  if (featuredIndex != null && featuredIndex != undefined) {
-    defaults.interactive.active.featured.index = featuredIndex;
-  }
-  if (featuredId != null && featuredId != undefined) {
-    defaults.interactive.active.featured.id = featuredId;
-  }
-  if (contentIndex != null && contentIndex != undefined) {
-    defaults.interactive.active.content.index = contentIndex;
-  }
-  if (contentId != null && contentId != undefined) {
-    defaults.interactive.active.content.id = contentId;
-  }
-  if (contentItems != null && contentItems != undefined) {
-    defaults.interactive.active.content.items = contentItems;
-  }
-  if (focusIndex != null && focusIndex != undefined) {
-    defaults.interactive.active.focus.index = focusIndex;
-  }
-  if (focusId != null && focusId != undefined) {
-    defaults.interactive.active.focus.id = focusId;
-  }
-  if (focusType != null && focusType != undefined) {
-    defaults.interactive.active.focus.type = focusType;
-  }
-  // if (focusSubtype != null && focusSubtype != undefined) {
-  //   defaults.interactive.active.focus.subtype = focusSubtype;
-  // }
-  if (itemIndex != null && itemIndex != undefined) {
-    defaults.interactive.active.item.index = itemIndex;
+import { defaults } from "../../variables.js";
+import { featured } from "../featured/featured.js";
+import { navigationScroller } from "./navigation_scrollers.js";
 
-    defaults.interactive.active.content.items[
-      defaults.interactive.active.content.index
-    ] =
-      defaults.interactive.content[
-        defaults.interactive.active.content.index
-      ].items[itemIndex];
+export function virtualMenu(options) {
+  options = options || {};
+  var active = defaults.interactive.active;
 
-    _navigation_scroller();
-  }
-  if (itemId != null && itemId != undefined) {
-    defaults.interactive.active.item.id = itemId;
-  }
-  _focusUI();
+  assignIfSet(active.menu, options.menu, ["index", "id"]);
+  assignIfSet(active.featured, options.featured, ["index", "id"]);
+  assignIfSet(active.content, options.content, ["index", "id", "items"]);
+  assignIfSet(active.focus, options.focus, ["index", "id", "type"]);
 
-  if(focusType == 'content'){
-    _focusFEATUREDUI();
+  var item = options.item || {};
+  if (item.index != null) {
+    active.item.index = item.index;
+    active.content.items[active.content.index] =
+      defaults.interactive.content[active.content.index].items[item.index];
+    navigationScroller();
   }
-};
+  if (item.id != null) {
+    active.item.id = item.id;
+  }
 
-function _focusUI() {
+  focusUI();
+
+  if (options.focus && options.focus.type == "content") {
+    focusFeaturedUI();
+  }
+}
+
+function assignIfSet(target, source, keys) {
+  if (!source) return;
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    if (source[key] != null) {
+      target[key] = source[key];
+    }
+  }
+}
+
+function focusUI() {
   $(`.${defaults.ui.interactive}__item--active`).removeClass(
     `${defaults.ui.interactive}__item--active`
   );
   $(`#${defaults.interactive.active.focus.id}`).addClass(
     `${defaults.ui.interactive}__item--active`
   );
-  
 }
 
-function _focusFEATUREDUI(){
+function focusFeaturedUI() {
   let activeContent = defaults.interactive.active.content;
-  let activeSection = defaults.interactive.active.content.items[activeContent.index];
-  
-  init.ui.featured.changeContent(
-    activeContent.index, 
-    activeContent.id, 
+  let activeSection = activeContent.items[activeContent.index];
+
+  featured.changeContent(
+    activeContent.index,
+    activeContent.id,
     activeSection.index,
     activeSection.id,
     activeSection.type,
     activeSection.subtype
-    );
+  );
 }

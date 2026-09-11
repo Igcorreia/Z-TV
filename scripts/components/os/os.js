@@ -1,4 +1,4 @@
-window._os = function () {
+export function detectOS() {
   //rendering engines
   var engine = {
     ie: 0,
@@ -156,4 +156,4 @@ window._os = function () {
     browser: browser,
     system: system,
   };
-};
+}
