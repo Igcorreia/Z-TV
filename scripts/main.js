@@ -54,12 +54,16 @@ function startup() {
     })
     .then(function () {
       setTimeout(function () {
+        // .always, not .done: a single broken thumbnail must not leave the app stuck on the preloader
         $(defaults.root)
           .imagesLoaded({ background: ".ui__img" })
-          .done(function () {
+          .always(function () {
             startNavigation();
             setTimeout(function () {
-              introsound.play();
+              var playing = introsound.play();
+              if (playing && playing.catch) {
+                playing.catch(function () {});
+              }
               preloader.hide();
             }, defaults.sections.preloader_animation_duration);
           });
