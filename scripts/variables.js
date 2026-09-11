@@ -6,7 +6,6 @@ window.defaults = {
   data_url: 'https://api.json-generator.com/templates/V4CxV24pVVAq/data',
   local_bd: '/data/db.json',
   introsound: "bell.wav",
-  apikey: 'hse6tqhn131ci8u314xv3tvr0ogzndesvzsyp80f',
   debug: {
     active: false,
     auto_refresh: false,

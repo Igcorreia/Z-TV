@@ -2,6 +2,7 @@
 /dist
 /.vscode
 /haters
+/scripts/config.local.js
 .DS_Store
 .bak
 .history

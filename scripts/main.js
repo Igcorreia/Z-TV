@@ -27,24 +27,42 @@ window.init = {
   interactivity: function () {
     _navigation();
   },
-  fetchdata: new Promise(function (resolve, reject) {
-    $.ajax({
-      url: data_url,
-      headers: {
-        'Authorization':'Bearer ' + defaults.apikey,
-      },
-      cache: false,
-      success: function (json) {
-        resolve(json);
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        reject(new Error('Data fetch failed: ' + textStatus));
-      },
+  loadconfig: function () {
+    if (defaults.mode == "local") {
+      return Promise.resolve({});
+    }
+    return import("./config.local.js")
+      .then(function (module) {
+        return module.config || {};
+      })
+      .catch(function () {
+        return {};
+      });
+  },
+  fetchdata: function (config) {
+    return new Promise(function (resolve, reject) {
+      var headers = {};
+      if (defaults.mode != "local" && config.apikey) {
+        headers["Authorization"] = "Bearer " + config.apikey;
+      }
+      $.ajax({
+        url: data_url,
+        headers: headers,
+        cache: false,
+        success: function (json) {
+          resolve(json);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          reject(new Error("Data fetch failed: " + textStatus));
+        },
+      });
     });
-  }),
+  },
   startup: function () {
     try {
-      init.fetchdata
+      init
+        .loadconfig()
+        .then(init.fetchdata)
         .then(function (json) {
           defaults.data = json;
         })

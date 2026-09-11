@@ -32,6 +32,16 @@ Use number 2,4,6,8 to navigate in you TV Browser:
 - 6 right (Arrow Right)
 - 8 down (Arrow Down)
 
+# Configuration
+
+By default the app runs in `local` mode and reads `data/db.json`. To use the remote
+JSON Generator API instead, set `mode: 'remote'` in `scripts/variables.js` and copy
+`scripts/config.example.js` to `scripts/config.local.js` with your API key. The local
+config file is gitignored and is never sent in local mode.
+
+> The API key that used to live in `variables.js` is still present in git history and
+> should be treated as public — rotate it on json-generator.com.
+
 # Rules and Limitations
 
 - Browser CSS and JS rules from Chrome 48 ( linear-gradient does not work)
